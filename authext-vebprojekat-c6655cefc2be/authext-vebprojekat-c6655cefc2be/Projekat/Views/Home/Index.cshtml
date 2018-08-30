@@ -7,7 +7,51 @@
     @Styles.Render("~/Content/Stylesheets/Index.css")
 }
 
-<div id="the-title" >
+<div>
+    @if (ViewBag.User != null)
+    {
+        if (ViewBag.User.Uloga_Korisnika == Projekat.Models.Korisnik.Uloga.Vozac)
+        {
+            if (ViewBag.User.Lokacija == null)
+            {
+                <p>Vasa trenutna lokacija je: Garaza </p>
+
+            }
+            else
+            {
+                <p>Vasa trenutna lokacija je: @ViewBag.User.Lokacija </p>
+
+
+            }
+
+            <h3>Unesite Novu lokaciju:</h3>
+            <form action="/AddLocation"   method="POST">
+                <div class="input-padded">
+                    <label for="input-username">Adresa:</label>
+                    <input id="input-username" name="adresa" type="text" placeholder="nova adresa"  required />
+                </div>
+
+                <div class="input-padded">
+                    <label for="input-password">X-koordinata:</label>
+                    <input id="input-password" name="x" type="text"  required />
+                </div>
+
+                <div class="input-padded">
+                    <label for="input-first-name">Y-koordinata</label>
+                    <input id="input-first-name" name="y" type="text"  required />
+                </div>
+
+                
+
+                <input type="submit" value="Dodaj" />
+            </form>
+
+
+
+        }
+    }
+   
+
 </div>
 
 

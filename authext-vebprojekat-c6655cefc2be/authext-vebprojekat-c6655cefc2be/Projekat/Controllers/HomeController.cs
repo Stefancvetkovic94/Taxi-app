@@ -10,7 +10,10 @@ namespace Projekat.Controllers
         [Route("")]
         public ActionResult Index()
         {
-           
+            if (LoggedIn != null)
+            {
+                ViewBag.User = Baza.GetUser(LoggedIn);
+            }
 
 
             return View();
@@ -33,6 +36,8 @@ namespace Projekat.Controllers
         }
 
        
+
+
 
 
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;

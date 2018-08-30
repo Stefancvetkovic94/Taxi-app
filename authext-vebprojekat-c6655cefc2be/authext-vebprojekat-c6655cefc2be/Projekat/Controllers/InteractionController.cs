@@ -86,7 +86,60 @@ namespace Projekat.Controllers
             return View("EditUserResult");
         }
 
-      
+
+        [Route("AddLocation")]
+        public ActionResult AddLocation()
+        {
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+            if (Baza.GetUser(LoggedIn).Uloga_Korisnika != Models.Korisnik.Uloga.Vozac)
+                return View("NotAuthorized");
+
+            if (Request.HttpMethod == "GET")
+                return View();
+
+            var lokacija = new Models.Lokacija()
+            {
+                Adresa = Request.Params["adresa"],
+                X_kordinata = Request.Params["x"],
+                Y_kordinata = Request.Params["y"],
+            };
+            if (Baza.AddLocation(lokacija))
+            {
+                
+                if (Baza.AddAdress(lokacija.Adresa))
+                {
+                    
+                    if (Baza.UpdateLocationInKorisnik(LoggedIn, lokacija.Adresa))
+                    {
+                        ViewBag.Title = "Lokacija je promenjena";
+                        return View("LocationResult");
+
+                    }
+                    else
+                    {
+                        ViewBag.Title = "Lokacija nije promenjena";
+                        return View("LocationResult");
+                    }
+                }
+                else
+                {
+                    ViewBag.Title = "Lokacija nije promenjena";
+                    return View("LocationResult");
+                }
+            }
+            else
+            {
+                ViewBag.Title = "Lokacija nije promenjena";
+                return View("LocationResult");
+            }
+
+            
+
+
+            
+        }
 
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;
         private IBaza Baza => (IBaza)HttpContext.Application[ApplicationKeys.Baza];

@@ -15,7 +15,7 @@ namespace Projekat.Baza
 
         // User related
 
-      
+
 
         public bool CanLogIn(string username, string password)
         {
@@ -59,13 +59,13 @@ namespace Projekat.Baza
             }
         }
 
-        
+
         public Korisnik GetUser(string username)
         {
             using (var cmd = _conn.CreateCommand())
             {
                 cmd.CommandText =
-                    @"SELECT Ime, Prezime, Uloga_Korisnika, Pol, Email, JMBG, Telefon
+                    @"SELECT Ime, Prezime, Uloga_Korisnika, Pol, Email, JMBG, Telefon, Lokacija, Automobil
                       FROM Korisnici
                       WHERE Korisnicko_Ime = @name
                       LIMIT 1;";
@@ -76,7 +76,21 @@ namespace Projekat.Baza
                     if (!reader.Read())
                         return null;
 
-                    return new Korisnik()
+                    Korisnik k = new Korisnik();
+                    k.Korisnicko_Ime = username;
+                    k.Ime = reader.GetString(0);
+                    k.Prezime = reader.GetString(1);
+                    k.Uloga_Korisnika = (Korisnik.Uloga)reader.GetInt32(2);
+                    k.Telefon = reader.GetString(6);
+                    k.Email = reader.GetString(4);
+                    if (reader.GetString(7) != "0")
+                        k.Lokacija = reader.GetString(7);
+                    if (reader.GetString(8) != "0")
+                        k.Automobil = reader.GetString(8);
+
+                    return k;
+
+                  /*  return new Korisnik()
                     {
                         Korisnicko_Ime = username,
                         Ime = reader.GetString(0),
@@ -85,14 +99,19 @@ namespace Projekat.Baza
                         Telefon = reader.GetString(6),
                         Email = reader.GetString(4),
                         Pol = reader.GetString(3),
-                        JMBG = reader.GetString(5)
+                        JMBG = reader.GetString(5),
+                        
+                        Lokacija = reader.GetString(7)
+                        //Automobil= reader.GetString(8)
+
 
                     };
+                    */
                 }
             }
         }
 
-      
+
 
 
         private readonly SQLiteConnection _conn;
@@ -126,6 +145,53 @@ namespace Projekat.Baza
                 cmd.Parameters.AddWithValue("@jmbg", jmbg);
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@korisnickoime", korisnickoime);
+
+                return Execute(cmd);
+            }
+        }
+
+        public bool AddLocation(Lokacija lokacija)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"INSERT INTO Lokacije(Adresa, X_kordinata, Y_kordinata)
+                      VALUES (@adresa, @x, @y);";
+                cmd.Parameters.AddWithValue("@adresa", lokacija.Adresa);
+                cmd.Parameters.AddWithValue("@x", lokacija.X_kordinata);
+                cmd.Parameters.AddWithValue("@y", lokacija.Y_kordinata);
+                
+
+                return Execute(cmd);
+            }
+        }
+
+        public bool AddAdress(string adresa)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"INSERT INTO Adrese(Adresa_Ulice)
+                      VALUES (@adresa);";
+                cmd.Parameters.AddWithValue("@adresa", adresa);
+                
+
+
+                return Execute(cmd);
+            }
+        }
+
+        public bool UpdateLocationInKorisnik(string korisnik, string lokacija)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"UPDATE Korisnici
+                      SET Lokacija = @lokacija
+                      WHERE Korisnicko_Ime = @korisnik";
+                cmd.Parameters.AddWithValue("@lokacija", lokacija);
+                cmd.Parameters.AddWithValue("@korisnik", korisnik);
+                
 
                 return Execute(cmd);
             }
