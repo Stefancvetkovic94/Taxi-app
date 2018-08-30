@@ -148,16 +148,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Stylesheets\CreateTheme.css" />
     <Content Include="Content\Stylesheets\Index.css" />
-    <Content Include="Content\Stylesheets\Messages.css" />
-    <Content Include="Content\Stylesheets\Search.css" />
     <Content Include="Content\Stylesheets\ShowUser.css" />
-    <Content Include="Content\Stylesheets\Subforum.css" />
-    <Content Include="Content\Stylesheets\Theme.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Stylesheets\Global.css" />
-    <Content Include="header.ico" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -186,6 +180,7 @@
     <Content Include="Views\Shared\NotAuthorized.cshtml" />
     <Content Include="Views\Shared\NotLoggedIn.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Interaction\EditUserResult.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
