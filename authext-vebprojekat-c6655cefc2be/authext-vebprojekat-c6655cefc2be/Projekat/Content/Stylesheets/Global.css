@@ -1,0 +1,75 @@
+﻿body {
+    background-color: white;
+    margin-right: 0;
+
+}
+
+
+
+#header {
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 16ex;
+    padding: 1ex 5em;
+    box-sizing: border-box;
+    background-image:url("../../../header.ico");
+    border: 4px solid blue;
+    
+
+}
+
+#title {
+    padding-left: 20ex;
+    float: left;
+    font-size: 7ex;
+    
+    
+ 
+    
+}
+
+#links {
+    float: right;
+    text-align: right;
+    font-size: 2ex;
+}
+
+#content {
+    margin-top: 17ex;
+}
+
+.padded-top {
+    padding-top: 1ex;
+}
+
+.padded-left {
+    padding-left: 1em;
+}
+
+.padded-bottom {
+    padding-bottom: 1ex;
+}
+
+.input-padded {
+    padding-bottom: 0.5ex;
+}
+
+.margin-top {
+    margin-top: 1ex;
+}
+
+.horizontal {
+    display: inline;
+    padding-right: 0.5em;
+}
+
+.bordered {
+    border-right: 1px solid red;
+}
+
+.display-blocky {
+    display: block;
+}

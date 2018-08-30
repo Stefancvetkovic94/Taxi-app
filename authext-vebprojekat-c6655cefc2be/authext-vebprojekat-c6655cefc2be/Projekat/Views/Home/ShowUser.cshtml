@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "User " + ViewBag.User.Korisnicko_Ime;
+}
+
+@section styles {
+    @Styles.Render("~/Content/Stylesheets/ShowUser.css")
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <p>Username: @ViewBag.User.Korisnicko_Ime</p>
+    <p>Role: @ViewBag.User.Uloga_Korisnika</p>
+    @if (ViewBag.User.Korisnicko_Ime == Request.Cookies[CookieKeys.Login]?.Value)
+    {
+        <p>First Name: @ViewBag.User.Ime</p>
+        <p>Last Name: @ViewBag.User.Prezime</p>
+        <p>Phone No: @ViewBag.User.Telefon</p>
+        <p>Email: @ViewBag.User.Email</p>
+        <p>Pol: @ViewBag.User.Pol</p>
+        <p>JMBG: @ViewBag.User.JMBG</p>
+
+
+        <a class="display-blocky padded-top" href="/EditUser">Promenite podatke</a>
+
+
+
+        if (ViewBag.User.Uloga_Korisnika == Projekat.Models.Korisnik.Uloga.Dispecer)
+        {
+            <a class="display-blocky padded-top" href="/AddDriver">Dodajte Vozaca</a>
+        }
+
+    
+        
+    }
+</div>

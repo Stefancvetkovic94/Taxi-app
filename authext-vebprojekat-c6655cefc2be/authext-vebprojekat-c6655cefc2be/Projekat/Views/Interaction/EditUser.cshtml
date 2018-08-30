@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "EditUser";
+}
+
+<h2>EditUser</h2>
+<h2>@ViewBag.Title</h2>
+<form action="/EditUser" method="POST">
+   
+
+  
+
+    <div class="input-padded">
+        <label for="input-first-name">First name</label>
+        <input id="input-first-name" name="first-name" type="text" placeholder="Your first name" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-last-name">Last name</label>
+        <input id="input-last-name" name="last-name" type="text" placeholder="Your last name" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-phone-no">Pol</label>
+        <input id="input-phone-no" name="pol" type="text" placeholder="Your phone number" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-phone-no">JMBG</label>
+        <input id="input-phone-no" name="jmbg" type="text" placeholder="Your phone number" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-phone-no">Phone No</label>
+        <input id="input-phone-no" name="phone-no" type="text" placeholder="Your phone number" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-email">Email</label>
+        <input id="input-email" name="email" type="text" placeholder="Your email" required />
+    </div>
+    <input type="submit" value="Edit" />
+</form>
+
