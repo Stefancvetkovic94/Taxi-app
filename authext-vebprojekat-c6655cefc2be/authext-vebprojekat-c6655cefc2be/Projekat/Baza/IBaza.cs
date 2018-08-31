@@ -16,6 +16,7 @@ namespace Projekat.Baza
         Korisnik GetUser(string username);
         bool EditUser(string korisnickoime, string ime, string prezime, string telefon, string pol, string jmbg, string email);
 
+        IEnumerable<Voznja> GetVoznjeMusterija(string musterija);
 
     }
 }

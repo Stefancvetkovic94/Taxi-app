@@ -12,8 +12,19 @@ namespace Projekat.Controllers
         {
             if (LoggedIn != null)
             {
-                ViewBag.User = Baza.GetUser(LoggedIn);
+                Projekat.Models.Korisnik korisnik = new Models.Korisnik();
+                korisnik = Baza.GetUser(LoggedIn);
+                ViewBag.User = korisnik;
+
+                if(korisnik.Uloga_Korisnika== Models.Korisnik.Uloga.Musterija)
+                {
+                    IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                    voznje = Baza.GetVoznjeMusterija(LoggedIn);
+                    ViewBag.Voznje = voznje;
+                    
+                }
             }
+            
 
 
             return View();

@@ -224,5 +224,53 @@ namespace Projekat.Baza
                 return Execute(cmd);
             }
         }
+
+        public IEnumerable<Voznja> GetVoznjeMusterija(string musterija)
+        {
+            var list = new List<Voznja>();
+
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Id, Datum_Vreme, Lokacija, Tip, Musterija, Odrediste, Dispecer, Vozac, Iznos, Komentar, Status_Voznje
+                      FROM Voznje
+                      WHERE Musterija = @name;";
+                cmd.Parameters.AddWithValue("@name", musterija);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string tip = string.Empty;
+                        if (reader.GetInt32(3) == 0)
+                        {
+                             tip = "Putnicki";
+                        }
+                        else
+                        {
+                             tip = "Kombi";
+                        }
+
+                        list.Add(new Voznja()
+                        {
+                            Id = reader.GetInt32(0),
+                            Datum_Vreme = reader.GetDateTime(1),
+                            Lokacija = reader.GetString(2),
+                            Musterija = reader.GetString(4),
+                            Odrediste = reader.GetString(5),
+                            Dispecer = reader.GetString(6),
+                            Vozac = reader.GetString(7),
+                            Iznos = reader.GetInt32(8),
+                            Komentar = reader.GetString(9),
+                            Status_Voznje = (Voznja.Status)reader.GetInt32(10),
+                            Tip = tip
+
+                        });
+                    }
+                }
+            }
+
+            return list;
+        }
     }
 }

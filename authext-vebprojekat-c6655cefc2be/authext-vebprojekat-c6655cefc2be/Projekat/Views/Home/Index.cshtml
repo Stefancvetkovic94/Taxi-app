@@ -56,7 +56,84 @@
         if (ViewBag.User.Uloga_Korisnika == Projekat.Models.Korisnik.Uloga.Musterija)
         {
             <a class="horizontal" href="/VoznjaMusterija">Zahtev za voznju</a>
-
+            
+            <h3>Pregled voznji:</h3>
+            <table border="1">
+                <tr>
+                    <td>
+                        ID
+                    </td>
+                    <td>
+                        Datum
+                    </td>
+                    <td>
+                        Lokacija
+                    </td>
+                    <td>
+                        Tip
+                    </td>
+                    <td>
+                        Musterija
+                    </td>
+                    <td>
+                        Odrediste
+                    </td>
+                    <td>
+                        Dispecer
+                    </td>
+                    <td>
+                        Vozac
+                    </td>
+                    <td>
+                        iznos
+                    </td>
+                    <td>
+                        Komentar
+                    </td>
+                    <td>
+                        Status Voznje
+                    </td>
+                    <td colspan="2"></td>
+                </tr> @foreach (var item in ViewBag.Voznje)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.Datum_Vreme
+                        </td>
+                        <td>
+                            @item.Lokacija
+                        </td>
+                        <td>
+                            @item.Tip
+                        </td>
+                        <td>
+                            @item.Musterija
+                        </td>
+                        <td>
+                            @item.Odrediste
+                        </td>
+                        <td>
+                            @item.Dispecer
+                        </td>
+                        <td>
+                            @item.Vozac
+                        </td>
+                        <td>
+                            @item.Iznos
+                        </td>
+                        <td>
+                            @item.Komentar
+                        </td>
+                        <td>
+                            @item.Status_Voznje
+                        </td>
+                        
+                    </tr>
+                }
+            </table>
 
 
         }

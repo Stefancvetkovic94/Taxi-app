@@ -18,7 +18,7 @@ namespace Projekat.Models
             Neuspesna,
             Uspesna
         }
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime Datum_Vreme { get; set; }
         public string Lokacija { get; set; }
