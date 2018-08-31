@@ -196,5 +196,33 @@ namespace Projekat.Baza
                 return Execute(cmd);
             }
         }
+
+        public bool AddVoznja(Voznja voznja)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"INSERT INTO Voznje(Id, Datum_Vreme, Lokacija, Tip, Musterija, Status_Voznje)
+                      VALUES (NULL, @datum, @lokacija, @tip, @musterija ,@status);";
+                cmd.Parameters.AddWithValue("@datum", voznja.Datum_Vreme.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@lokacija", voznja.Lokacija);
+                if(voznja.Tip== "Putnicki")
+                {
+                    cmd.Parameters.AddWithValue("@tip", (int)Models.Automobil.Tip.Putnicki);
+
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@tip", (int)Models.Automobil.Tip.Kombi);
+
+                }
+
+                cmd.Parameters.AddWithValue("@musterija", voznja.Musterija);
+                cmd.Parameters.AddWithValue("@status", (int)voznja.Status_Voznje);
+                
+
+                return Execute(cmd);
+            }
+        }
     }
 }

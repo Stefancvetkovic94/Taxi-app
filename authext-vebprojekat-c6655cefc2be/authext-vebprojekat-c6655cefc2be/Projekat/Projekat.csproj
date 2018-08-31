@@ -182,6 +182,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Interaction\EditUserResult.cshtml" />
     <Content Include="Views\Interaction\LocationResult.cshtml" />
+    <Content Include="Views\Interaction\VoznjaMusterija.cshtml" />
+    <Content Include="Views\Interaction\VoznjaResult.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

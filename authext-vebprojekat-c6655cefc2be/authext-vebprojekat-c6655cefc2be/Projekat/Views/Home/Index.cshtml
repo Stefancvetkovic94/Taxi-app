@@ -10,6 +10,7 @@
 <div>
     @if (ViewBag.User != null)
     {
+        //VOZAC//
         if (ViewBag.User.Uloga_Korisnika == Projekat.Models.Korisnik.Uloga.Vozac)
         {
             if (ViewBag.User.Lokacija == null)
@@ -45,13 +46,22 @@
 
                 <input type="submit" value="Dodaj" />
             </form>
+            //-----------------------------------------------------------------------//
+
 
 
 
         }
-    }
-   
 
+        if (ViewBag.User.Uloga_Korisnika == Projekat.Models.Korisnik.Uloga.Musterija)
+        {
+            <a class="horizontal" href="/VoznjaMusterija">Zahtev za voznju</a>
+
+
+
+        }
+
+    }
 </div>
 
 

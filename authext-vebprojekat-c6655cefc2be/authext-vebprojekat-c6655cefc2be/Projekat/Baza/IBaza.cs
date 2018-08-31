@@ -11,6 +11,7 @@ namespace Projekat.Baza
         bool Register(Korisnik user);
         bool AddLocation(Lokacija lokacija);
         bool AddAdress(string adresa);
+        bool AddVoznja(Voznja voznja);
         bool UpdateLocationInKorisnik(string korisnik, string lokacija);
         Korisnik GetUser(string username);
         bool EditUser(string korisnickoime, string ime, string prezime, string telefon, string pol, string jmbg, string email);

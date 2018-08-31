@@ -135,11 +135,59 @@ namespace Projekat.Controllers
                 return View("LocationResult");
             }
 
-            
-
-
-            
         }
+
+        [Route("VoznjaMusterija")]
+        public ActionResult VoznjaMusterija()
+        {
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+            if (Baza.GetUser(LoggedIn).Uloga_Korisnika != Models.Korisnik.Uloga.Musterija)
+                return View("NotAuthorized");
+
+            if (Request.HttpMethod == "GET")
+                return View();
+
+            string adresa = Request.Params["adresa"];
+            string x = Request.Params["x"];
+            string y = Request.Params["y"];
+            string tip = Request.Params["tip"];
+
+            Lokacija lokacija = new Lokacija();
+            lokacija.X_kordinata = x;
+            lokacija.Y_kordinata = y;
+            lokacija.Adresa = adresa;
+            Baza.AddLocation(lokacija);
+
+            Baza.AddAdress(adresa);
+
+            Voznja voznja = new Voznja();
+
+            voznja.Datum_Vreme = DateTime.Now;
+            voznja.Lokacija = adresa;
+            voznja.Tip = tip;
+            voznja.Musterija = LoggedIn;
+            voznja.Status_Voznje = Voznja.Status.Kreirana;
+
+            if (Baza.AddVoznja(voznja))
+            {
+                ViewBag.Title = "Voznja je kreirana i na cekanju";
+                return View("VoznjaResult");
+            }
+            else
+            {
+                ViewBag.Title = "Voznja nije kreirana";
+                return View("VoznjaResult");
+            }
+                
+
+
+                  
+        }
+
+
+
 
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;
         private IBaza Baza => (IBaza)HttpContext.Application[ApplicationKeys.Baza];
