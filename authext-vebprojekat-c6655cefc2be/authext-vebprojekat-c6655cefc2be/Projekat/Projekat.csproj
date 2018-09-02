@@ -186,6 +186,11 @@
     <Content Include="Views\Interaction\VoznjaResult.cshtml" />
     <Content Include="Views\Home\AddComent.cshtml" />
     <Content Include="Views\Interaction\ComentResult.cshtml" />
+    <Content Include="Views\Home\IzmeniVoznju.cshtml" />
+    <Content Include="Views\Home\EditVoznjaResult.cshtml" />
+    <Content Include="Views\Interaction\AddVoznjaDispecer.cshtml" />
+    <Content Include="Views\Home\DodeliVozaca.cshtml" />
+    <Content Include="Views\Home\DodeliVozacaResult.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

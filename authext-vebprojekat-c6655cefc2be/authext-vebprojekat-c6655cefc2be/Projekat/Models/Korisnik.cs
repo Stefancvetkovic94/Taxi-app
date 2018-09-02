@@ -34,6 +34,9 @@ namespace Projekat.Models
 
         public string Lokacija { get; set; }
         public string Automobil { get; set; }
+        public int Slobodan { get; set; }
+
+
 
     }
 }

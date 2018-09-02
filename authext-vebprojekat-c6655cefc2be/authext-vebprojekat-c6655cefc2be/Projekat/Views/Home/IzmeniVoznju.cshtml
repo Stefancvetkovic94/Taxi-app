@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "IzmeniVoznju";
+}
+
+<h2>IzmeniVoznju</h2>
+<form action="/IzmeniVoznju2" method="POST">
+
+
+
+
+    <div class="input-padded">
+        <label for="input-first-name">Lokacija</label>
+        <input id="input-first-name" name="Lokacija" type="text"  required />
+    </div>
+
+    <div class="input-padded">
+        <label class="padded-right" for="input-kind">Tip</label>
+        <select id="input-kind" name="Tip" required>
+            <option value="Putnicki">Putnicki</option>
+            <option value="Kombi">Kombi</option>
+        </select>
+    </div>
+
+    <div class="input-padded">
+        <label for="input-last-name">Id</label>
+        <input id="input-last-name" name="Id" type="text" value="@ViewBag.Id" readonly required />
+    </div>
+   
+    <input type="submit" value="Edit" />
+</form>
+
+

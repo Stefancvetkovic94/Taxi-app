@@ -25,6 +25,7 @@ namespace Projekat.Controllers
 
             if (Request.HttpMethod == "GET")
                 return View();
+            
 
             var user = new Korisnik()
             {
@@ -170,7 +171,7 @@ namespace Projekat.Controllers
             voznja.Musterija = LoggedIn;
             voznja.Status_Voznje = Voznja.Status.Kreirana;
 
-            if (Baza.AddVoznja(voznja))
+            if (Baza.AddVoznjaMusterija(voznja))
             {
                 ViewBag.Title = "Voznja je kreirana i na cekanju";
                 return View("VoznjaResult");
@@ -234,6 +235,68 @@ namespace Projekat.Controllers
             
         }
 
+        [Route("AddVoznjaDispecer")]
+        public ActionResult AddVoznjaDispecer()
+        {
+
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+
+            ViewBag.vozaci = Baza.GetVozaci();
+
+
+
+            return View("AddVoznjaDispecer");
+
+        }
+
+        [Route("AddVoznjaDispecer2")]
+        public ActionResult AddVoznjaDispecer2()
+        {
+
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+            string adresa = Request.Params["adresa"];
+            string x = Request.Params["x"];
+            string y = Request.Params["y"];
+            string tip = Request.Params["tip"];
+            string vozac = Request.Params["vozac"];
+
+            Lokacija lokacija = new Lokacija();
+            lokacija.X_kordinata = x;
+            lokacija.Y_kordinata = y;
+            lokacija.Adresa = adresa;
+
+            Baza.AddLocation(lokacija);
+            Baza.AddAdress(adresa);
+
+            Voznja voznja = new Voznja();
+
+            voznja.Datum_Vreme = DateTime.Now;
+            voznja.Lokacija = adresa;
+            voznja.Tip = tip;
+            voznja.Dispecer = LoggedIn;
+            voznja.Status_Voznje = Voznja.Status.Formirana;
+            voznja.Vozac = vozac;
+
+            Baza.VozacZauzet(vozac);
+
+
+            //Baza.UpdateLocationInKorisnik(vozac, adresa);
+            if (Baza.AddVoznjaDispecer(voznja))
+            {
+                ViewBag.Title = "Voznja je kreirana i na cekanju";
+                return View("VoznjaResult");
+            }
+            else
+            {
+                ViewBag.Title = "Voznja nije kreirana";
+                return View("VoznjaResult");
+            }
+
+        }
 
 
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "AddVoznjaDispecer";
+}
+
+<h2>Popunite podatke za voznju:</h2>
+
+<form action="/AddVoznjaDispecer2" method="POST">
+    <div class="input-padded">
+        <label for="input-username">Adresa:</label>
+        <input id="input-username" name="adresa" type="text" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-password">X_Kordinata:</label>
+        <input id="input-password" name="x" type="text" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-first-name">Y_Kordinata</label>
+        <input id="input-first-name" name="y" type="text" required />
+    </div>
+
+    <div class="input-padded">
+        <label class="padded-right" for="input-kind">Tip Vozila</label>
+        <select id="input-kind" name="tip" >
+            <option value="Putnicki">Putnicki</option>
+            <option value="Kombi">Kombi</option>
+        </select>
+    </div>
+
+    <div class="input-padded">
+        <label class="padded-right" for="input-kind">Vozac</label>
+        <select id="input-kind" name="vozac">
+            @foreach (string s in ViewBag.vozaci)
+            {
+            <option value="@s">@s</option>
+            
+            }
+        </select>
+    </div>
+
+
+
+
+    <input type="submit" value="Posalji zahtev" />
+</form>

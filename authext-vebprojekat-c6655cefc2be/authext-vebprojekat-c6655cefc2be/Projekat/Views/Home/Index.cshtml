@@ -89,14 +89,26 @@
                             iznos
                         </td>
                         <td>
-                            Komentar
-                        </td>
-                        <td>
                             Status Voznje
                         </td>
-                        
+                        <td>
+                            Komentar napisao
+                        </td>
+                        <td>
+                            Tekst
+                        </td>
+                        <td>
+                            Ocena
+                        </td>
+                        <td>
+                            Datum 
+                        </td>
+                        <td colspan="2">
+                            Opcije
+                        </td>
                     </tr> @foreach (var item in ViewBag.Voznje)
                     {
+                        int brojac = 0;
                         <tr>
                             <td>
                                 @item.Id
@@ -126,18 +138,57 @@
                                 @item.Iznos
                             </td>
                             <td>
-                                @item.Komentar
-                            </td>
-                            <td>
                                 @item.Status_Voznje
                             </td>
+                           
+                                @foreach (var k in ViewBag.Komentari)
+                                {
+                                    brojac++;
+                                    if (k.Voznja == item.Id)
+                                    {
+
+
+                            <td>
+                                @k.Korisnik
+                            </td>
+                            <td>
+                                @k.Opis
+                            </td>
+                            <td>
+                                @k.Ocena
+                            </td>
+                            <td>
+                                @k.Datum
+                            </td>
+                                        break;
+                                    }
+                                    else if(brojac == ViewBag.Komentari.Count)
+                                    {
+
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        break;
+
+                                    }
+                                }
+
                             @if (item.Status_Voznje == 0)
                         {
                                 <td>
                                    @Html.ActionLink("Izmeni", "IzmeniVoznju", new { id = item.Id })
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Otkazi", "OtkaziVoznju", new { id = item.Id })
+                                    @Html.ActionLink("Otkazi", "OtkaziVoznju", new { id = item.Id  })
                                 </td>
 
                             }
@@ -147,7 +198,282 @@
             </form>
 
         }
+        if (ViewBag.User.Uloga_Korisnika == Projekat.Models.Korisnik.Uloga.Dispecer)
+        {
 
+
+              <a class="horizontal" href="/AddVoznjaDispecer">Formiraj voznju</a>
+
+            <h3>Pregled vasih voznji:</h3>
+            <form action="/Forma" method="POST">
+                <table border="1">
+                    <tr>
+                        <td>
+                            ID
+                        </td>
+                        <td>
+                            Datum
+                        </td>
+                        <td>
+                            Lokacija
+                        </td>
+                        <td>
+                            Tip
+                        </td>
+                        <td>
+                            Musterija
+                        </td>
+                        <td>
+                            Odrediste
+                        </td>
+                        <td>
+                            Dispecer
+                        </td>
+                        <td>
+                            Vozac
+                        </td>
+                        <td>
+                            iznos
+                        </td>
+                        <td>
+                            Status Voznje
+                        </td>
+                        <td>
+                            Komentar napisao
+                        </td>
+                        <td>
+                            Tekst
+                        </td>
+                        <td>
+                            Ocena
+                        </td>
+                        <td>
+                            Datum
+                        </td>
+                        
+                    </tr> @foreach (var item in ViewBag.Voznje)
+                    {
+                        int brojac = 0;
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Datum_Vreme
+                            </td>
+                            <td>
+                                @item.Lokacija
+                            </td>
+                            <td>
+                                @item.Tip
+                            </td>
+                            <td>
+                                @item.Musterija
+                            </td>
+                            <td>
+                                @item.Odrediste
+                            </td>
+                            <td>
+                                @item.Dispecer
+                            </td>
+                            <td>
+                                @item.Vozac
+                            </td>
+                            <td>
+                                @item.Iznos
+                            </td>
+                            <td>
+                                @item.Status_Voznje
+                            </td>
+
+                            @foreach (var k in ViewBag.Komentari)
+                            {
+                                brojac++;
+                                if (k.Voznja == item.Id)
+                                {
+
+
+                                    <td>
+                                        @k.Korisnik
+                                    </td>
+                                    <td>
+                                        @k.Opis
+                                    </td>
+                                    <td>
+                                        @k.Ocena
+                                    </td>
+                                    <td>
+                                        @k.Datum
+                                    </td>
+                                    break;
+                                }
+                                else if (brojac == ViewBag.Komentari.Count)
+                                {
+
+                                    <td>
+                                        /
+                                    </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                    break;
+
+                                }
+                            }
+
+                            
+                        </tr>
+                    }
+                </table>
+            </form>
+
+            <h3>Sve voznje u sistemu:</h3>
+            <form action="/Forma" method="POST">
+                <table border="1">
+                    <tr>
+                        <td>
+                            ID
+                        </td>
+                        <td>
+                            Datum
+                        </td>
+                        <td>
+                            Lokacija
+                        </td>
+                        <td>
+                            Tip
+                        </td>
+                        <td>
+                            Musterija
+                        </td>
+                        <td>
+                            Odrediste
+                        </td>
+                        <td>
+                            Dispecer
+                        </td>
+                        <td>
+                            Vozac
+                        </td>
+                        <td>
+                            iznos
+                        </td>
+                        <td>
+                            Status Voznje
+                        </td>
+                        <td>
+                            Komentar napisao
+                        </td>
+                        <td>
+                            Tekst
+                        </td>
+                        <td>
+                            Ocena
+                        </td>
+                        <td>
+                            Datum
+                        </td>
+                        <td>
+                            Dodaj vozaca
+                        </td>
+                    </tr> @foreach (var item in ViewBag.VoznjeSve)
+                    {
+                        int brojac = 0;
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Datum_Vreme
+                            </td>
+                            <td>
+                                @item.Lokacija
+                            </td>
+                            <td>
+                                @item.Tip
+                            </td>
+                            <td>
+                                @item.Musterija
+                            </td>
+                            <td>
+                                @item.Odrediste
+                            </td>
+                            <td>
+                                @item.Dispecer
+                            </td>
+                            <td>
+                                @item.Vozac
+                            </td>
+                            <td>
+                                @item.Iznos
+                            </td>
+                            <td>
+                                @item.Status_Voznje
+                            </td>
+
+                            @foreach (var k in ViewBag.Komentari)
+                            {
+                                brojac++;
+                                if (k.Voznja == item.Id)
+                                {
+
+
+                                    <td>
+                                        @k.Korisnik
+                                    </td>
+                                    <td>
+                                        @k.Opis
+                                    </td>
+                                    <td>
+                                        @k.Ocena
+                                    </td>
+                                    <td>
+                                        @k.Datum
+                                    </td>
+                                    break;
+                                }
+                                else if (brojac == ViewBag.Komentari.Count)
+                                {
+
+                                    <td>
+                                        /
+                                    </td>
+                                    <td>
+                                        /
+                                    </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                    break;
+
+                                }
+                            }
+                            @if (item.Vozac == "/")
+                        {
+                              
+                                <td>
+                                    @Html.ActionLink("Dodeli vozaca", "DodeliVozaca", new { id = item.Id })
+
+
+                                    
+                                </td>
+
+                            }
+
+                        </tr>
+                    }
+                </table>
+            </form>
+        }
     }
 </div>
 

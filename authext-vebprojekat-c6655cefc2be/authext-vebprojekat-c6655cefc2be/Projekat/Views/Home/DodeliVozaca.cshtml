@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "DodeliVozaca";
+}
+
+<h2>Dodeli Vozaca:</h2>
+<form action="/DodeliVozaca2" method="POST">
+
+
+
+
+    <div class="input-padded">
+        <label for="input-first-name">Id voznje: </label>
+        <input id="input-first-name" name="id" type="text" value="@ViewBag.Id" readonly  required />
+    </div>
+
+    <div class="input-padded">
+        <label class="padded-right" for="input-kind">Vozac:</label>
+        <select id="input-kind" name="vozac">
+            @foreach (string s in ViewBag.Vozaci)
+            {
+                <option value="@s">@s</option>
+
+            }
+        </select>
+    </div>
+
+
+
+  
+
+    <input type="submit" value="Dodeli" />
+</form>

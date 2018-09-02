@@ -21,7 +21,30 @@ namespace Projekat.Controllers
                     IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
                     voznje = Baza.GetVoznjeMusterija(LoggedIn);
                     ViewBag.Voznje = voznje;
+                    List<Models.Komentar> komentari = new List<Models.Komentar>();
+                    komentari = Baza.GetKomentareZaVoznje();
+                    ViewBag.Komentari = komentari;
                     
+                }
+
+                if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Dispecer)
+                {
+                    IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                    voznje = Baza.GetVoznjeDispecer(LoggedIn);
+                    ViewBag.Voznje = voznje;
+
+                    List<Models.Voznja> voznjesve = new List<Models.Voznja>();
+                    voznjesve = Baza.GetVoznjeSve();
+                    ViewBag.VoznjeSve = voznjesve;
+
+                    List<Models.Komentar> komentari = new List<Models.Komentar>();
+                    komentari = Baza.GetKomentareZaVoznje();
+                    ViewBag.Komentari = komentari;
+
+                    IEnumerable<string> vozaci = new List<string>();
+                    vozaci = Baza.GetVozaci();
+                    ViewBag.Vozaci = vozaci;
+
                 }
             }
             
@@ -50,7 +73,7 @@ namespace Projekat.Controllers
         public ActionResult OtkaziVoznju(int id)
         {
 
-            if(Baza.OtkaziVoznju(id));
+            if(Baza.OtkaziVoznju(id))
             {
 
             }
@@ -59,6 +82,84 @@ namespace Projekat.Controllers
             return View("AddComent");
         }
 
+        [Route("IzmeniVoznju/{id}")]
+        public ActionResult IzmeniVoznju(int id)
+        {
+
+
+            ViewBag.Id = id;
+            ViewBag.Korisnik = LoggedIn;
+            return View("IzmeniVoznju");
+        }
+
+        [Route("IzmeniVoznju2")]
+        public ActionResult IzmeniVoznju2()
+        {
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+
+
+
+
+            if (Request.HttpMethod == "GET")
+                return View();
+
+            string Lokacija = Request.Params["Lokacija"];
+            string Tip = Request.Params["Tip"];
+            string Id = Request.Params["Id"];
+            
+
+
+
+
+            if (Baza.IzmeniVoznju(Lokacija, Tip, Id))
+                ViewBag.Title = "Editing Successful";
+            else
+                ViewBag.Title = "Editing Failed";
+
+            return View("EditVoznjaResult");
+        }
+
+        [Route("DodeliVozaca/{id}")]
+        public ActionResult DodeliVozaca(int id)
+        {
+            IEnumerable<string> vozaci = new List<string>();
+            vozaci = Baza.GetVozaci();
+            ViewBag.Vozaci = vozaci;
+
+            ViewBag.Id = id;
+            ViewBag.Korisnik = LoggedIn;
+            return View("DodeliVozaca");
+        }
+
+        [Route("DodeliVozaca2")]
+        public ActionResult DodeliVozaca2()
+        {
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+
+
+
+
+            if (Request.HttpMethod == "GET")
+                return View();
+
+            string id = Request.Params["id"];
+            string vozac = Request.Params["vozac"];
+            string dispecer = LoggedIn;
+
+
+            Baza.VozacZauzet(vozac);
+
+            if (Baza.DodeliVozacaVoznji(id, vozac, dispecer))
+                ViewBag.Title = "Dodeljen vozac";
+            else
+                ViewBag.Title = "Vozac nije dodeljen";
+
+            return View("DodeliVozacaResult");
+        }
 
 
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;
