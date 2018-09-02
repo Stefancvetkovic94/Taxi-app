@@ -46,8 +46,18 @@ namespace Projekat.Controllers
             return View();
         }
 
-       
+        [Route("OtkaziVoznju/{id}")]
+        public ActionResult OtkaziVoznju(int id)
+        {
 
+            if(Baza.OtkaziVoznju(id));
+            {
+
+            }
+            ViewBag.Id = id;
+            ViewBag.Korisnik = LoggedIn;
+            return View("AddComent");
+        }
 
 
 

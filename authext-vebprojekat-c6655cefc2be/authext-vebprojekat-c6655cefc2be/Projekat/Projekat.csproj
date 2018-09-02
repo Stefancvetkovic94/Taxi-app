@@ -184,6 +184,8 @@
     <Content Include="Views\Interaction\LocationResult.cshtml" />
     <Content Include="Views\Interaction\VoznjaMusterija.cshtml" />
     <Content Include="Views\Interaction\VoznjaResult.cshtml" />
+    <Content Include="Views\Home\AddComent.cshtml" />
+    <Content Include="Views\Interaction\ComentResult.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

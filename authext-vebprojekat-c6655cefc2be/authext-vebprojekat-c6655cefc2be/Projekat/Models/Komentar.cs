@@ -11,7 +11,7 @@ namespace Projekat.Models
         public string Opis { get; set; }
         public DateTime Datum { get; set; }
         public string Korisnik { get; set; }
-        public string Voznja { get; set; }
+        public int Voznja { get; set; }
         public int Ocena { get; set; }
 
 

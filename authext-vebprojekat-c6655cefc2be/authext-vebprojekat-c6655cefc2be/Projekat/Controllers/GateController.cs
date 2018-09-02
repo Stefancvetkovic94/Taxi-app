@@ -82,6 +82,7 @@ namespace Projekat.Controllers
         }
 
 
+
         private IBaza Baza => (IBaza) HttpContext.Application[ApplicationKeys.Baza];
     }
 }

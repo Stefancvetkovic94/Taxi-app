@@ -272,5 +272,56 @@ namespace Projekat.Baza
 
             return list;
         }
+
+        public bool OtkaziVoznju(int id)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"UPDATE Voznje
+                      SET Status_Voznje = @status
+                      WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@status", (int)Voznja.Status.Otkazana);
+                cmd.Parameters.AddWithValue("@id", id);
+
+
+                return Execute(cmd);
+            }
+        }
+
+        public bool AddComment(Komentar komentar)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"INSERT INTO Komentari(Id, Opis, Datum, Korisnik, Voznja, Ocena)
+                      VALUES (NULL, @opis, @datum, @korisnik, @voznja, @ocena);";
+                cmd.Parameters.AddWithValue("@opis", komentar.Opis);
+                cmd.Parameters.AddWithValue("@datum", komentar.Datum);
+                cmd.Parameters.AddWithValue("@voznja", komentar.Voznja);
+                cmd.Parameters.AddWithValue("@ocena", komentar.Ocena);
+
+                cmd.Parameters.AddWithValue("@korisnik", komentar.Korisnik);
+
+
+                return Execute(cmd);
+            }
+        }
+
+        public bool AddCommentToVoznja(int id, string komentar)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"UPDATE Voznje
+                      SET Komentar = @komentar
+                      WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@komentar", komentar);
+                cmd.Parameters.AddWithValue("@id", id);
+                
+
+                return Execute(cmd);
+            }
+        }
     }
 }

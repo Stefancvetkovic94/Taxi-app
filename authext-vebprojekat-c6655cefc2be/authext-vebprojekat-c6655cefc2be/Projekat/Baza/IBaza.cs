@@ -12,9 +12,13 @@ namespace Projekat.Baza
         bool AddLocation(Lokacija lokacija);
         bool AddAdress(string adresa);
         bool AddVoznja(Voznja voznja);
+        bool AddComment(Komentar komentar);
+        bool AddCommentToVoznja(int id, string komentar);
+
         bool UpdateLocationInKorisnik(string korisnik, string lokacija);
         Korisnik GetUser(string username);
         bool EditUser(string korisnickoime, string ime, string prezime, string telefon, string pol, string jmbg, string email);
+        bool OtkaziVoznju(int id);
 
         IEnumerable<Voznja> GetVoznjeMusterija(string musterija);
 

@@ -186,6 +186,53 @@ namespace Projekat.Controllers
                   
         }
 
+        [Route("AddComent")]
+        public ActionResult AddComent()
+        {
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+           
+            if (Request.HttpMethod == "GET")
+                return View();
+
+            var komentar = new Komentar()
+            {
+                Opis = Request.Params["opis"],
+                Datum = DateTime.Now,
+                Korisnik = Request.Params["korisnik"],
+                Voznja = Int32.Parse( Request.Params["voznja"]),
+                Ocena = Int32.Parse(Request.Params["ocena"]),
+                
+
+            };
+
+            if(Baza.AddComment(komentar))
+            {
+                if(Baza.AddCommentToVoznja(komentar.Voznja, komentar.Opis))
+                {
+                    ViewBag.Title = "dodat je komentar";
+                    return View("ComentResult");
+
+                }
+                else
+                {
+                    ViewBag.Title = "nije dodat komentar";
+                    return View("ComentResult");
+                }
+            }
+            else
+            {
+                ViewBag.Title = "nije dodat komentar";
+                return View("ComentResult");
+
+            }
+
+
+
+
+            
+        }
 
 
 

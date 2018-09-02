@@ -58,83 +58,93 @@
             <a class="horizontal" href="/VoznjaMusterija">Zahtev za voznju</a>
             
             <h3>Pregled voznji:</h3>
-            <table border="1">
-                <tr>
-                    <td>
-                        ID
-                    </td>
-                    <td>
-                        Datum
-                    </td>
-                    <td>
-                        Lokacija
-                    </td>
-                    <td>
-                        Tip
-                    </td>
-                    <td>
-                        Musterija
-                    </td>
-                    <td>
-                        Odrediste
-                    </td>
-                    <td>
-                        Dispecer
-                    </td>
-                    <td>
-                        Vozac
-                    </td>
-                    <td>
-                        iznos
-                    </td>
-                    <td>
-                        Komentar
-                    </td>
-                    <td>
-                        Status Voznje
-                    </td>
-                    <td colspan="2"></td>
-                </tr> @foreach (var item in ViewBag.Voznje)
-                {
+            <form action="/Forma" method="POST">
+                <table border="1">
                     <tr>
                         <td>
-                            @item.Id
+                            ID
                         </td>
                         <td>
-                            @item.Datum_Vreme
+                            Datum
                         </td>
                         <td>
-                            @item.Lokacija
+                            Lokacija
                         </td>
                         <td>
-                            @item.Tip
+                            Tip
                         </td>
                         <td>
-                            @item.Musterija
+                            Musterija
                         </td>
                         <td>
-                            @item.Odrediste
+                            Odrediste
                         </td>
                         <td>
-                            @item.Dispecer
+                            Dispecer
                         </td>
                         <td>
-                            @item.Vozac
+                            Vozac
                         </td>
                         <td>
-                            @item.Iznos
+                            iznos
                         </td>
                         <td>
-                            @item.Komentar
+                            Komentar
                         </td>
                         <td>
-                            @item.Status_Voznje
+                            Status Voznje
                         </td>
                         
-                    </tr>
-                }
-            </table>
+                    </tr> @foreach (var item in ViewBag.Voznje)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Datum_Vreme
+                            </td>
+                            <td>
+                                @item.Lokacija
+                            </td>
+                            <td>
+                                @item.Tip
+                            </td>
+                            <td>
+                                @item.Musterija
+                            </td>
+                            <td>
+                                @item.Odrediste
+                            </td>
+                            <td>
+                                @item.Dispecer
+                            </td>
+                            <td>
+                                @item.Vozac
+                            </td>
+                            <td>
+                                @item.Iznos
+                            </td>
+                            <td>
+                                @item.Komentar
+                            </td>
+                            <td>
+                                @item.Status_Voznje
+                            </td>
+                            @if (item.Status_Voznje == 0)
+                        {
+                                <td>
+                                   @Html.ActionLink("Izmeni", "IzmeniVoznju", new { id = item.Id })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Otkazi", "OtkaziVoznju", new { id = item.Id })
+                                </td>
 
+                            }
+                        </tr>
+                    }
+                </table>
+            </form>
 
         }
 
