@@ -26,6 +26,19 @@
             }
             <a class="horizontal" href="/AddLocation">Unesite vasu novu lokaciju</a>
 
+            <form action="/Sort3" method="POST">
+
+
+                <div class="input-padded">
+                    <label class="padded-right" for="input-kind">Sortiraj po:</label>
+                    <select id="input-kind" name="sort" required>
+                        <option value="1">Datum</option>
+                        <option value="2">Ocena</option>
+                    </select>
+                    <input type="submit" value="Sortiraj" />
+
+                </div>
+            </form>
 
             <h3>Pregled vasih voznji:</h3>
             <form action="/Filtriraj" method="POST">
@@ -179,7 +192,6 @@
 
                             <td>
                                 <div class="input-padded">
-                                    <label class="padded-right" for="input-kind">Status</label>
                                     <select id="input-kind" name="status" required>
                                         <option value="0">Kreirana</option>
                                         <option value="1">Formirana</option>
@@ -196,6 +208,7 @@
 
                             </td>
                        </tr>
+
                     
                 </table>
             </form>
@@ -351,7 +364,21 @@
         if (ViewBag.User.Uloga_Korisnika == Projekat.Models.Korisnik.Uloga.Musterija)
         {
             <a class="horizontal" href="/VoznjaMusterija">Zahtev za voznju</a>
-            
+
+            <form action="/Sort2" method="POST">
+
+
+                <div class="input-padded">
+                    <label class="padded-right" for="input-kind">Sortiraj po:</label>
+                    <select id="input-kind" name="sort" required>
+                        <option value="1">Datum</option>
+                        <option value="2">Ocena</option>
+                    </select>
+                    <input type="submit" value="Sortiraj" />
+
+                </div>
+            </form>
+
             <h3>Pregled voznji:</h3>
             <form action="/Filtriraj2" method="POST">
                 <table border="1">
@@ -514,7 +541,6 @@
 
                         <td>
                             <div class="input-padded">
-                                <label class="padded-right" for="input-kind">Status</label>
                                 <select id="input-kind" name="status" required>
                                     <option value="0">Kreirana</option>
                                     <option value="1">Formirana</option>
@@ -540,6 +566,21 @@
 
 
               <a class="horizontal" href="/AddVoznjaDispecer">Formiraj voznju</a>
+
+            <form action="/Sort1" method="POST">
+               
+
+                <div class="input-padded">
+                    <label class="padded-right" for="input-kind">Sortiraj po:</label>
+                    <select id="input-kind" name="sort" required>
+                        <option value="1">Datum</option>
+                        <option value="2">Ocena</option>
+                    </select>
+                    <input type="submit" value="Sortiraj" />
+
+                </div>
+            </form>
+
 
             <h3>Pregled vasih voznji:</h3>
             <form action="/Filtriraj3" method="POST">
@@ -671,7 +712,6 @@
 
                         <td>
                             <div class="input-padded">
-                                <label class="padded-right" for="input-kind">Status</label>
                                 <select id="input-kind" name="status" required>
                                     <option value="0">Kreirana</option>
                                     <option value="1">Formirana</option>
@@ -841,7 +881,6 @@
 
                         <td>
                             <div class="input-padded">
-                                <label class="padded-right" for="input-kind">Status</label>
                                 <select id="input-kind" name="status" required>
                                     <option value="0">Kreirana</option>
                                     <option value="1">Formirana</option>

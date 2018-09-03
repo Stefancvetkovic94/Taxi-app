@@ -43,8 +43,8 @@ namespace Projekat.Baza
             using (var cmd = _conn.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Korisnici(Korisnicko_Ime, Lozinka, Ime, Prezime, Uloga_Korisnika, Pol, JMBG, Telefon, Email, Lokacija, Automobil)
-                      VALUES (@name, @password, @firstname, @lastname, @role ,@pol, @jmbg, @phoneno, @email, NULL, NULL);";
+                    @"INSERT INTO Korisnici(Korisnicko_Ime, Lozinka, Ime, Prezime, Uloga_Korisnika, Pol, JMBG, Telefon, Email)
+                      VALUES (@name, @password, @firstname, @lastname, @role ,@pol, @jmbg, @phoneno, @email);";
                 cmd.Parameters.AddWithValue("@name", user.Korisnicko_Ime);
                 cmd.Parameters.AddWithValue("@password", user.Lozinka);
                 cmd.Parameters.AddWithValue("@firstname", user.Ime);

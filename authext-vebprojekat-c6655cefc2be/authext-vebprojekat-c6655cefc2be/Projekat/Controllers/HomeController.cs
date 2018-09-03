@@ -19,7 +19,7 @@ namespace Projekat.Controllers
                 korisnik = Baza.GetUser(LoggedIn);
                 ViewBag.User = korisnik;
 
-                if(korisnik.Uloga_Korisnika== Models.Korisnik.Uloga.Musterija)
+                if(korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Musterija)
                 {
                     IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
                     voznje = Baza.GetVoznjeMusterija(LoggedIn);
@@ -37,17 +37,19 @@ namespace Projekat.Controllers
                     ViewBag.Voznje = voznje;
 
                     List<Models.Voznja> voznjesve = new List<Models.Voznja>();
+                    List<Models.Voznja> voznjesvee = new List<Models.Voznja>();
+
                     voznjesve = Baza.GetVoznjeSve();
+                   // voznjesvee = voznjesve.OrderByDescending(x => x.Datum_Vreme).ToList();
                     ViewBag.VoznjeSve = voznjesve;
 
                     List<Models.Komentar> komentari = new List<Models.Komentar>();
                     komentari = Baza.GetKomentareZaVoznje();
                     ViewBag.Komentari = komentari;
 
-                    IEnumerable<string> vozaci = new List<string>();
-                    vozaci = Baza.GetVozaci();
-                    ViewBag.Vozaci = vozaci;
+                    
 
+                    //var newList = people.OrderBy(x => x.LastName)
                 }
 
                 if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Vozac)
@@ -448,6 +450,7 @@ namespace Projekat.Controllers
                 voznje = Baza.GetVoznjeSve();
                 List<Models.Voznja> voznje2 = new List<Models.Voznja>();
 
+               // var newList = people.OrderBy(x => x.LastName)
                 foreach (Voznja v in voznje)
                 {
                     if ((int)v.Status_Voznje == status)
@@ -476,6 +479,126 @@ namespace Projekat.Controllers
 
         }
 
+        [Route("Sort1")]
+        public ActionResult Sort1()
+        {
+            Projekat.Models.Korisnik korisnik = new Models.Korisnik();
+            korisnik = Baza.GetUser(LoggedIn);
+            ViewBag.User = korisnik;
+
+            int status = Int32.Parse( Request.Params["sort"]);
+            
+            if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Dispecer)
+            {
+                if (status == 1)
+                {
+                    IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                    IEnumerable<Models.Voznja> help = new List<Models.Voznja>();
+
+                    voznje = Baza.GetVoznjeDispecer(LoggedIn);
+                    help = voznje.OrderByDescending(x => x.Datum_Vreme).ToList();
+
+                    ViewBag.Voznje = help;
+
+                    List<Models.Voznja> voznjesve = new List<Models.Voznja>();
+                    List<Models.Voznja> help2 = new List<Models.Voznja>();
+
+                    voznjesve = Baza.GetVoznjeSve();
+                    help2 = voznjesve.OrderByDescending(x => x.Datum_Vreme).ToList();
+                    ViewBag.VoznjeSve = help2;
+
+                    List<Models.Komentar> komentari = new List<Models.Komentar>();
+                    komentari = Baza.GetKomentareZaVoznje();
+                    ViewBag.Komentari = komentari;
+
+                    return View("Index");
+                }
+
+            }
+            return View("Index");
+
+
+
+        }
+
+        [Route("Sort2")]
+        public ActionResult Sort2()
+        {
+            Projekat.Models.Korisnik korisnik = new Models.Korisnik();
+            korisnik = Baza.GetUser(LoggedIn);
+            ViewBag.User = korisnik;
+
+            int status = Int32.Parse(Request.Params["sort"]);
+
+            if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Musterija)
+            {
+                if (status == 1)
+                {
+                    IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                    IEnumerable<Models.Voznja> help = new List<Models.Voznja>();
+
+                    voznje = Baza.GetVoznjeMusterija(LoggedIn);
+                    help = voznje.OrderByDescending(x => x.Datum_Vreme).ToList();
+
+                    ViewBag.Voznje = help;
+
+                    
+
+                    List<Models.Komentar> komentari = new List<Models.Komentar>();
+                    komentari = Baza.GetKomentareZaVoznje();
+                    ViewBag.Komentari = komentari;
+
+                    return View("Index");
+                }
+
+            }
+            return View("Index");
+
+
+
+        }
+
+        [Route("Sort3")]
+        public ActionResult Sort3()
+        {
+            Projekat.Models.Korisnik korisnik = new Models.Korisnik();
+            korisnik = Baza.GetUser(LoggedIn);
+            ViewBag.User = korisnik;
+
+            int status = Int32.Parse(Request.Params["sort"]);
+
+            if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Vozac)
+            {
+                if (status == 1)
+                {
+                    IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                    IEnumerable<Models.Voznja> help = new List<Models.Voznja>();
+
+                    voznje = Baza.GetVoznjeVozac(LoggedIn);
+                    help = voznje.OrderByDescending(x => x.Datum_Vreme).ToList();
+
+                    ViewBag.Voznje = help;
+
+                    List<Models.Voznja> voznjesve = new List<Models.Voznja>();
+                    List<Models.Voznja> help2 = new List<Models.Voznja>();
+
+                    voznjesve = Baza.GetVoznjeSveKreirane();
+                    help2 = voznjesve.OrderByDescending(x => x.Datum_Vreme).ToList();
+                    ViewBag.VoznjeSve = help2;
+
+                    List<Models.Komentar> komentari = new List<Models.Komentar>();
+                    komentari = Baza.GetKomentareZaVoznje();
+                    ViewBag.Komentari = komentari;
+
+                    return View("Index");
+                }
+
+            }
+            return View("Index");
+
+
+
+        }
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;
         private IBaza Baza => (IBaza)HttpContext.Application[ApplicationKeys.Baza];
     }
