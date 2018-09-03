@@ -204,7 +204,7 @@ namespace Projekat.Baza
                 cmd.CommandText =
                     @"INSERT INTO Voznje(Id, Datum_Vreme, Lokacija, Tip, Musterija, Status_Voznje)
                       VALUES (NULL, @datum, @lokacija, @tip, @musterija ,@status);";
-                cmd.Parameters.AddWithValue("@datum", voznja.Datum_Vreme.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@datum", voznja.Datum_Vreme);
                 cmd.Parameters.AddWithValue("@lokacija", voznja.Lokacija);
                 if (voznja.Tip == "Putnicki")
                 {
@@ -384,7 +384,7 @@ namespace Projekat.Baza
                 cmd.CommandText =
                     @"INSERT INTO Voznje(Id, Datum_Vreme, Lokacija, Tip, Dispecer, Status_Voznje, Vozac)
                       VALUES (NULL, @datum, @lokacija, @tip, @dispecer,@status, @vozac);";
-                cmd.Parameters.AddWithValue("@datum", voznja.Datum_Vreme.ToString());
+                cmd.Parameters.AddWithValue("@datum", voznja.Datum_Vreme);
                 cmd.Parameters.AddWithValue("@lokacija", voznja.Lokacija);
                 if (voznja.Tip == "Putnicki")
                 {
@@ -499,7 +499,7 @@ namespace Projekat.Baza
                         list.Add(new Voznja()
                         {
                             Id = reader.GetInt32(0),
-                            Datum_Vreme = DateTime.Now,
+                            Datum_Vreme = reader.GetDateTime(1),
                             Lokacija = reader.GetString(2),
                             Musterija = reader.GetString(4),
                             Odrediste = reader.GetString(5),
@@ -546,7 +546,7 @@ namespace Projekat.Baza
                         list.Add(new Voznja()
                         {
                             Id = reader.GetInt32(0),
-                            Datum_Vreme = DateTime.Now,
+                            Datum_Vreme = reader.GetDateTime(1),
                             Lokacija = reader.GetString(2),
                             Musterija = reader.GetString(4),
                             Odrediste = reader.GetString(5),
@@ -612,7 +612,7 @@ namespace Projekat.Baza
                         list.Add(new Voznja()
                         {
                             Id = reader.GetInt32(0),
-                            Datum_Vreme = DateTime.Now,
+                            Datum_Vreme = reader.GetDateTime(1),
                             Lokacija = reader.GetString(2),
                             Musterija = reader.GetString(4),
                             Odrediste = reader.GetString(5),
@@ -659,7 +659,7 @@ namespace Projekat.Baza
                         list.Add(new Voznja()
                         {
                             Id = reader.GetInt32(0),
-                            Datum_Vreme = DateTime.Now,
+                            Datum_Vreme = reader.GetDateTime(1),
                             Lokacija = reader.GetString(2),
                             Musterija = reader.GetString(4),
                             Odrediste = reader.GetString(5),

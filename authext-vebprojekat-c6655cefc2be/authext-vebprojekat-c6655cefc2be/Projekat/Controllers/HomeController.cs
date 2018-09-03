@@ -304,6 +304,178 @@ namespace Projekat.Controllers
 
         }
 
+        [Route("Filtriraj")]
+        public ActionResult Filtriraj()
+        {
+            Projekat.Models.Korisnik korisnik = new Models.Korisnik();
+            korisnik = Baza.GetUser(LoggedIn);
+            ViewBag.User = korisnik;
+
+            int status = Int32.Parse(Request.Params["status"]);
+
+
+            if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Vozac)
+            {
+                IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                voznje = Baza.GetVoznjeVozac(LoggedIn);
+                List<Models.Voznja> voznje2 = new List<Models.Voznja>();
+
+                foreach(Voznja v in voznje)
+                {
+                    if((int)v.Status_Voznje == status)
+                    {
+                        voznje2.Add(v);
+                    }
+
+                }
+
+                ViewBag.Voznje = voznje2;
+                
+
+                List<Models.Komentar> komentari = new List<Models.Komentar>();
+                komentari = Baza.GetKomentareZaVoznje();
+                ViewBag.Komentari = komentari;
+
+                List<Models.Voznja> voznjesve = new List<Models.Voznja>();
+                voznjesve = Baza.GetVoznjeSveKreirane();
+                ViewBag.VoznjeSve = voznjesve;
+
+            }
+            return View("Index");
+
+
+
+        }
+
+        [Route("Filtriraj2")]
+        public ActionResult Filtriraj2()
+        {
+            Projekat.Models.Korisnik korisnik = new Models.Korisnik();
+            korisnik = Baza.GetUser(LoggedIn);
+            ViewBag.User = korisnik;
+
+            int status = Int32.Parse(Request.Params["status"]);
+
+
+            if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Musterija)
+            {
+                IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                voznje = Baza.GetVoznjeMusterija(korisnik.Korisnicko_Ime);
+                List<Models.Voznja> voznje2 = new List<Models.Voznja>();
+
+                foreach (Voznja v in voznje)
+                {
+                    if ((int)v.Status_Voznje == status)
+                    {
+                        voznje2.Add(v);
+                    }
+
+                }
+
+                ViewBag.Voznje = voznje2;
+
+
+                List<Models.Komentar> komentari = new List<Models.Komentar>();
+                komentari = Baza.GetKomentareZaVoznje();
+                ViewBag.Komentari = komentari;
+
+               
+
+            }
+            return View("Index");
+
+
+
+        }
+
+        [Route("Filtriraj3")]
+        public ActionResult Filtriraj3()
+        {
+            Projekat.Models.Korisnik korisnik = new Models.Korisnik();
+            korisnik = Baza.GetUser(LoggedIn);
+            ViewBag.User = korisnik;
+
+            int status = Int32.Parse(Request.Params["status"]);
+
+
+            if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Dispecer)
+            {
+                IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                voznje = Baza.GetVoznjeDispecer(korisnik.Korisnicko_Ime);
+                List<Models.Voznja> voznje2 = new List<Models.Voznja>();
+
+                foreach (Voznja v in voznje)
+                {
+                    if ((int)v.Status_Voznje == status)
+                    {
+                        voznje2.Add(v);
+                    }
+
+                }
+
+                ViewBag.Voznje = voznje2;
+
+
+                List<Models.Voznja> voznjesve = new List<Models.Voznja>();
+                voznjesve = Baza.GetVoznjeSve();
+                ViewBag.VoznjeSve = voznjesve;
+
+                List<Models.Komentar> komentari = new List<Models.Komentar>();
+                komentari = Baza.GetKomentareZaVoznje();
+                ViewBag.Komentari = komentari;
+
+
+            }
+            return View("Index");
+
+
+
+        }
+
+        [Route("Filtriraj4")]
+        public ActionResult Filtriraj4()
+        {
+            Projekat.Models.Korisnik korisnik = new Models.Korisnik();
+            korisnik = Baza.GetUser(LoggedIn);
+            ViewBag.User = korisnik;
+
+            int status = Int32.Parse(Request.Params["status"]);
+
+
+            if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Dispecer)
+            {
+                IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                voznje = Baza.GetVoznjeSve();
+                List<Models.Voznja> voznje2 = new List<Models.Voznja>();
+
+                foreach (Voznja v in voznje)
+                {
+                    if ((int)v.Status_Voznje == status)
+                    {
+                        voznje2.Add(v);
+                    }
+
+                }
+
+                ViewBag.VoznjeSve = voznje2;
+
+
+                IEnumerable<Models.Voznja> voznjee = new List<Models.Voznja>();
+                voznjee = Baza.GetVoznjeDispecer(LoggedIn);
+                ViewBag.Voznje = voznjee;
+
+                List<Models.Komentar> komentari = new List<Models.Komentar>();
+                komentari = Baza.GetKomentareZaVoznje();
+                ViewBag.Komentari = komentari;
+
+
+            }
+            return View("Index");
+
+
+
+        }
+
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;
         private IBaza Baza => (IBaza)HttpContext.Application[ApplicationKeys.Baza];
     }
