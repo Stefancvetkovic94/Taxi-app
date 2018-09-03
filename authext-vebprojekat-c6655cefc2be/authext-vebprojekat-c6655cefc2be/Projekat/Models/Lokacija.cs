@@ -7,7 +7,7 @@ namespace Projekat.Models
 {
     public class Lokacija
     {
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         public string X_kordinata { get; set; }
         public string Y_kordinata { get; set; }

@@ -155,8 +155,8 @@ namespace Projekat.Baza
             using (var cmd = _conn.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Lokacije(Adresa, X_kordinata, Y_kordinata)
-                      VALUES (@adresa, @x, @y);";
+                    @"INSERT INTO Lokacije(Id, Adresa, X_kordinata, Y_kordinata)
+                      VALUES (NULL, @adresa, @x, @y);";
                 cmd.Parameters.AddWithValue("@adresa", lokacija.Adresa);
                 cmd.Parameters.AddWithValue("@x", lokacija.X_kordinata);
                 cmd.Parameters.AddWithValue("@y", lokacija.Y_kordinata);
@@ -171,8 +171,8 @@ namespace Projekat.Baza
             using (var cmd = _conn.CreateCommand())
             {
                 cmd.CommandText =
-                    @"INSERT INTO Adrese(Adresa_Ulice)
-                      VALUES (@adresa);";
+                    @"INSERT INTO Adrese(Id, Adresa_Ulice)
+                      VALUES (NULL, @adresa);";
                 cmd.Parameters.AddWithValue("@adresa", adresa);
 
 

@@ -7,6 +7,7 @@ namespace Projekat.Models
 {
     public class Adresa
     {
+        public int Id { get; set; }
         public string Adresa_Ulice { get; set; }
        
 
