@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "VoznjaUspesna";
+}
+
+<h2>Popunite Podatke:</h2>
+<form action="/VoznjaUspesna" method="POST">
+   
+    <div class="input-padded">
+        <label for="input-first-name">Voznja</label>
+        <input id="input-first-name" name="voznja" type="text" value="@ViewBag.Id" readonly required />
+    </div>
+    <div class="input-padded">
+        <label for="input-username">Adresa:</label>
+        <input id="input-username" name="adresa" type="text" placeholder="nova adresa" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-password">X-koordinata:</label>
+        <input id="input-password" name="x" type="text" required />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-first-name">Y-koordinata</label>
+        <input id="input-first-name" name="y" type="text" required />
+    </div>
+    <div class="input-padded">
+        <label for="input-last-name">Iznos</label>
+        <input id="input-last-name" name="iznos" type="text" required />
+    </div>
+
+
+
+    <input type="submit" value="Dodaj" />
+</form>

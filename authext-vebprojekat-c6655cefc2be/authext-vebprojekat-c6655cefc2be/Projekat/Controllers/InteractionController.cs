@@ -26,7 +26,7 @@ namespace Projekat.Controllers
             if (Request.HttpMethod == "GET")
                 return View();
             
-
+            
             var user = new Korisnik()
             {
                 Korisnicko_Ime = Request.Params["username"],
@@ -87,8 +87,25 @@ namespace Projekat.Controllers
             return View("EditUserResult");
         }
 
+        [Route("AddLocationHelp")]
+        public ActionResult AddLocationHelp()
+        {
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+            if (Baza.GetUser(LoggedIn).Uloga_Korisnika != Models.Korisnik.Uloga.Vozac)
+                return View("NotAuthorized");
+
+            if (Request.HttpMethod == "GET")
+                return View();
+
+            return View("AddLocation");
+
+        }
+
 
         [Route("AddLocation")]
+
         public ActionResult AddLocation()
         {
             if (LoggedIn == null)

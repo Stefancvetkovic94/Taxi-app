@@ -21,14 +21,19 @@ namespace Projekat.Baza
         bool EditUser(string korisnickoime, string ime, string prezime, string telefon, string pol, string jmbg, string email);
         bool IzmeniVoznju(string lokacija, string tip, string id);
         bool DodeliVozacaVoznji(string id, string vozac, string dispecer);
+        bool PrihvatiVoznju(int id, string vozac);
 
         bool OtkaziVoznju(int id);
+        bool VoznjaNeuspesna(int id);
+        bool VoznjaUspesna(int id, string odrediste, int iznos);
 
 
         Korisnik GetUser(string username);
         IEnumerable<Voznja> GetVoznjeMusterija(string musterija);
         IEnumerable<Voznja> GetVoznjeDispecer(string musterija);
+        IEnumerable<Voznja> GetVoznjeVozac(string musterija);
         List<Voznja> GetVoznjeSve();
+        List<Voznja> GetVoznjeSveKreirane();
         IEnumerable<string> GetVozaci();
         List<Komentar> GetKomentareZaVoznje();
 

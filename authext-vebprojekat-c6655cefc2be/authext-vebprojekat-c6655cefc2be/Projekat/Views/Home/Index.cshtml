@@ -24,28 +24,299 @@
 
 
             }
+            <a class="horizontal" href="/AddLocation">Unesite vasu novu lokaciju</a>
 
-            <h3>Unesite Novu lokaciju:</h3>
-            <form action="/AddLocation"   method="POST">
-                <div class="input-padded">
-                    <label for="input-username">Adresa:</label>
-                    <input id="input-username" name="adresa" type="text" placeholder="nova adresa"  required />
-                </div>
 
-                <div class="input-padded">
-                    <label for="input-password">X-koordinata:</label>
-                    <input id="input-password" name="x" type="text"  required />
-                </div>
+            <h3>Pregled vasih voznji:</h3>
+            <form action="/Forma" method="POST">
+                <table border="1">
+                    <tr>
+                        <td>
+                            ID
+                        </td>
+                        <td>
+                            Datum
+                        </td>
+                        <td>
+                            Lokacija
+                        </td>
+                        <td>
+                            Tip
+                        </td>
+                        <td>
+                            Musterija
+                        </td>
+                        <td>
+                            Odrediste
+                        </td>
+                        <td>
+                            Dispecer
+                        </td>
+                        <td>
+                            Vozac
+                        </td>
+                        <td>
+                            iznos
+                        </td>
+                        <td>
+                            Status Voznje
+                        </td>
+                        <td>
+                            Komentar napisao
+                        </td>
+                        <td>
+                            Tekst
+                        </td>
+                        <td>
+                            Ocena
+                        </td>
+                        <td>
+                            Datum
+                        </td>
+                        <td colspan="2">
+                            Opcije
+                        </td>
 
-                <div class="input-padded">
-                    <label for="input-first-name">Y-koordinata</label>
-                    <input id="input-first-name" name="y" type="text"  required />
-                </div>
+                    </tr> @foreach (var item in ViewBag.Voznje)
+                    {
+                        int brojac = 0;
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Datum_Vreme
+                            </td>
+                            <td>
+                                @item.Lokacija
+                            </td>
+                            <td>
+                                @item.Tip
+                            </td>
+                            <td>
+                                @item.Musterija
+                            </td>
+                            <td>
+                                @item.Odrediste
+                            </td>
+                            <td>
+                                @item.Dispecer
+                            </td>
+                            <td>
+                                @item.Vozac
+                            </td>
+                            <td>
+                                @item.Iznos
+                            </td>
+                            <td>
+                                @item.Status_Voznje
+                            </td>
 
-                
+                            @foreach (var k in ViewBag.Komentari)
+                            {
+                                brojac++;
+                                if (k.Voznja == item.Id)
+                                {
 
-                <input type="submit" value="Dodaj" />
+
+                                    <td>
+                                        @k.Korisnik
+                                    </td>
+                                    <td>
+                                        @k.Opis
+                                    </td>
+                                    <td>
+                                        @k.Ocena
+                                    </td>
+                                    <td>
+                                        @k.Datum
+                                    </td>
+                                    break;
+                                }
+                                else if (brojac == ViewBag.Komentari.Count)
+                                {
+
+                                    <td>
+                                        /
+                                    </td>
+                                    <td>
+                                        /
+                                    </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                    break;
+
+                                }
+                            }
+                            @if ((int)item.Status_Voznje == 3 || (int)item.Status_Voznje == 2 || (int)item.Status_Voznje == 1)
+                        {
+                                <td>
+                                    @Html.ActionLink("Neuspesna", "Neuspesna", new { id = item.Id })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Uspesna", "Uspesna", new { id = item.Id })
+                                </td>
+
+                            }
+                            else
+                            {
+
+                                <td>
+                                    /
+                                </td>
+                                <td>
+                                    /
+                                </td>
+                            }
+
+                        </tr>
+                    }
+                </table>
             </form>
+
+            <h3>Pregled svih kreiranih voznji u sistemu:</h3>
+            <form action="/Forma" method="POST">
+                <table border="1">
+                    <tr>
+                        <td>
+                            ID
+                        </td>
+                        <td>
+                            Datum
+                        </td>
+                        <td>
+                            Lokacija
+                        </td>
+                        <td>
+                            Tip
+                        </td>
+                        <td>
+                            Musterija
+                        </td>
+                        <td>
+                            Odrediste
+                        </td>
+                        <td>
+                            Dispecer
+                        </td>
+                        <td>
+                            Vozac
+                        </td>
+                        <td>
+                            iznos
+                        </td>
+                        <td>
+                            Status Voznje
+                        </td>
+                        <td>
+                            Komentar napisao
+                        </td>
+                        <td>
+                            Tekst
+                        </td>
+                        <td>
+                            Ocena
+                        </td>
+                        <td>
+                            Datum
+                        </td>
+                        <td colspan="1">
+                            Opcije
+                        </td>
+
+                    </tr> @foreach (var item in ViewBag.VoznjeSve)
+                    {
+                        int brojac = 0;
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Datum_Vreme
+                            </td>
+                            <td>
+                                @item.Lokacija
+                            </td>
+                            <td>
+                                @item.Tip
+                            </td>
+                            <td>
+                                @item.Musterija
+                            </td>
+                            <td>
+                                @item.Odrediste
+                            </td>
+                            <td>
+                                @item.Dispecer
+                            </td>
+                            <td>
+                                @item.Vozac
+                            </td>
+                            <td>
+                                @item.Iznos
+                            </td>
+                            <td>
+                                @item.Status_Voznje
+                            </td>
+
+                            @foreach (var k in ViewBag.Komentari)
+                            {
+                                brojac++;
+                                if (k.Voznja == item.Id)
+                                {
+
+
+                                    <td>
+                                        @k.Korisnik
+                                    </td>
+                                    <td>
+                                        @k.Opis
+                                    </td>
+                                    <td>
+                                        @k.Ocena
+                                    </td>
+                                    <td>
+                                        @k.Datum
+                                    </td>
+                                    break;
+                                }
+                                else if (brojac == ViewBag.Komentari.Count)
+                                {
+
+                                    <td>
+                                        /
+                                    </td>
+                                    <td>
+                                        /
+                                    </td>
+                                    <td>
+                                        /
+                                    </td>
+                                        <td>
+                                            /
+                                        </td>
+                                    break;
+
+                                }
+                            }
+                            @if ((int)item.Status_Voznje == 0)
+                        {
+                                <td>
+                                    @Html.ActionLink("Prihvati Voznju", "PrihvatiVoznju", new { id = item.Id })
+                                </td>
+                               
+
+                            }
+
+                        </tr>
+                    }
+                </table>
+            </form>
+
             //-----------------------------------------------------------------------//
 
 
@@ -109,6 +380,7 @@
                     </tr> @foreach (var item in ViewBag.Voznje)
                     {
                         int brojac = 0;
+                        string coment = "/";
                         <tr>
                             <td>
                                 @item.Id
@@ -147,7 +419,7 @@
                                     if (k.Voznja == item.Id)
                                     {
 
-
+                                        coment = k.Opis;
                             <td>
                                 @k.Korisnik
                             </td>
@@ -182,7 +454,7 @@
                                     }
                                 }
 
-                            @if (item.Status_Voznje == 0)
+                            @if ((int)item.Status_Voznje == 0)
                         {
                                 <td>
                                    @Html.ActionLink("Izmeni", "IzmeniVoznju", new { id = item.Id })
@@ -191,6 +463,26 @@
                                     @Html.ActionLink("Otkazi", "OtkaziVoznju", new { id = item.Id  })
                                 </td>
 
+                            }
+                            else if ((int)item.Status_Voznje == 6 && coment == "/")
+                            {
+
+                                <td>
+                                    @Html.ActionLink("Dodaj Komentar", "KomentarUspesna", new { id = item.Id })
+                                </td>
+                                <td>
+                                    /
+                                </td>
+                            }
+                            else
+                            {
+
+                                <td>
+                                    /
+                                </td>
+                                <td>
+                                    /
+                                </td>
                             }
                         </tr>
                     }
@@ -467,6 +759,14 @@
                                     
                                 </td>
 
+                            }
+                            else
+                            {
+
+                                <td>
+                                    /
+                                </td>
+                               
                             }
 
                         </tr>

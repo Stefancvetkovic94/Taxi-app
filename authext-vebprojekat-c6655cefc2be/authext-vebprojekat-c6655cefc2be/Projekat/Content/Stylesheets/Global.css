@@ -16,7 +16,8 @@
     padding: 1ex 5em;
     box-sizing: border-box;
     border: 4px solid blue;
-    
+    background-color: lightskyblue;
+    color : white;
 
 }
 

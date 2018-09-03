@@ -1,4 +1,7 @@
 ﻿using Projekat.Baza;
+using Projekat.Models;
+using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
 
@@ -44,6 +47,24 @@ namespace Projekat.Controllers
                     IEnumerable<string> vozaci = new List<string>();
                     vozaci = Baza.GetVozaci();
                     ViewBag.Vozaci = vozaci;
+
+                }
+
+                if (korisnik.Uloga_Korisnika == Models.Korisnik.Uloga.Vozac)
+                {
+                    IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+                    voznje = Baza.GetVoznjeVozac(LoggedIn);
+                    ViewBag.Voznje = voznje;
+
+                    List<Models.Voznja> voznjesve = new List<Models.Voznja>();
+                    voznjesve = Baza.GetVoznjeSveKreirane();
+                    ViewBag.VoznjeSve = voznjesve;
+
+                    List<Models.Komentar> komentari = new List<Models.Komentar>();
+                    komentari = Baza.GetKomentareZaVoznje();
+                    ViewBag.Komentari = komentari;
+
+                    
 
                 }
             }
@@ -161,6 +182,127 @@ namespace Projekat.Controllers
             return View("DodeliVozacaResult");
         }
 
+
+        [Route("PrihvatiVoznju/{id}")]
+        public ActionResult PrihvatiVoznju(int id)
+        {
+            int idvoznje = id;
+
+            Baza.VozacZauzet(LoggedIn);
+
+            if(Baza.PrihvatiVoznju(idvoznje, LoggedIn))
+            {
+                ViewBag.Title = "Voznja Prihvacena";
+                return View("PrihvatiVoznjuResult");
+
+            }
+            else
+            {
+                ViewBag.Title = "Voznja nije prihvacena";
+                return View("PrihvatiVoznjuResult");
+
+            }
+
+        }
+
+        [Route("Neuspesna/{id}")]
+        public ActionResult Neuspesna(int id)
+        {
+            int idvoznje = id;
+
+            Baza.VozacSlobodan(LoggedIn);
+            ViewBag.Korisnik = LoggedIn;
+            ViewBag.Id = idvoznje;
+
+
+            if (Baza.VoznjaNeuspesna(idvoznje))
+            {
+                return View("AddComent");
+
+            }
+            else
+            {
+                return View("AddComent");
+
+            }
+
+        }
+
+        [Route("Uspesna/{id}")]
+        public ActionResult Uspesna(int id)
+        {
+            int idvoznje = id;
+
+            Baza.VozacSlobodan(LoggedIn);
+            ViewBag.Korisnik = LoggedIn;
+            ViewBag.Id = idvoznje;
+
+
+         
+                return View("VoznjaUspesna");
+
+            
+
+        }
+
+        [Route("VoznjaUspesna")]
+        public ActionResult VoznjaUspesna()
+        {
+            if (LoggedIn == null)
+                return View("NotLoggedIn");
+
+
+            if (Request.HttpMethod == "GET")
+                return View();
+
+            string id = Request.Params["voznja"];
+            string odrediste = Request.Params["adresa"];
+            string x = Request.Params["x"];
+            string y = Request.Params["y"];
+            string iznos = Request.Params["iznos"];
+
+            Baza.UpdateLocationInKorisnik(LoggedIn, odrediste);
+            Baza.AddAdress(odrediste);
+
+            Lokacija lok = new Lokacija();
+            lok.Adresa = odrediste;
+            lok.X_kordinata = x;
+            lok.Y_kordinata = y;
+            Baza.AddLocation(lok);
+
+
+            if (Baza.VoznjaUspesna(Int32.Parse(id), odrediste, Int32.Parse(iznos)))
+            {
+                ViewBag.Title = "Voznja Uspesna";
+
+                return View("UspesnaResult");
+
+            }
+            else
+            {
+                ViewBag.Title = "Voznja nije uspesna";
+
+                return View("UspesnaResult");
+
+            }
+
+        }
+
+        [Route("KomentarUspesna/{id}")]
+        public ActionResult KomentarUspesna(int id)
+        {
+            int idvoznje = id;
+
+            ViewBag.Korisnik = LoggedIn;
+            ViewBag.Id = idvoznje;
+
+
+
+            return View("AddComent");
+
+
+
+        }
 
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;
         private IBaza Baza => (IBaza)HttpContext.Application[ApplicationKeys.Baza];

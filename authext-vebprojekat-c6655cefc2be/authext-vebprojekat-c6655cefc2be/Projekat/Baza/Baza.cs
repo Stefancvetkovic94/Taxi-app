@@ -582,6 +582,152 @@ namespace Projekat.Baza
                 return Execute(cmd);
             }
         }
+
+        public IEnumerable<Voznja> GetVoznjeVozac(string musterija)
+        {
+            var list = new List<Voznja>();
+
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Id, Datum_Vreme, Lokacija, Tip, Musterija, Odrediste, Dispecer, Vozac, Iznos, Komentar, Status_Voznje
+                      FROM Voznje
+                      WHERE Vozac = @name;";
+                cmd.Parameters.AddWithValue("@name", musterija);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string tip = string.Empty;
+                        if (reader.GetInt32(3) == 0)
+                        {
+                            tip = "Putnicki";
+                        }
+                        else
+                        {
+                            tip = "Kombi";
+                        }
+
+                        list.Add(new Voznja()
+                        {
+                            Id = reader.GetInt32(0),
+                            Datum_Vreme = DateTime.Now,
+                            Lokacija = reader.GetString(2),
+                            Musterija = reader.GetString(4),
+                            Odrediste = reader.GetString(5),
+                            Dispecer = reader.GetString(6),
+                            Vozac = reader.GetString(7),
+                            Iznos = reader.GetInt32(8),
+                            Komentar = reader.GetString(9),
+                            Status_Voznje = (Voznja.Status)reader.GetInt32(10),
+                            Tip = tip
+
+                        });
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        public List<Voznja> GetVoznjeSveKreirane()
+        {
+            var list = new List<Voznja>();
+
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Id, Datum_Vreme, Lokacija, Tip, Musterija, Odrediste, Dispecer, Vozac, Iznos, Komentar, Status_Voznje
+                      FROM Voznje
+                      WHERE Status_Voznje=0;";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string tip = string.Empty;
+                        if (reader.GetInt32(3) == 0)
+                        {
+                            tip = "Putnicki";
+                        }
+                        else
+                        {
+                            tip = "Kombi";
+                        }
+
+                        list.Add(new Voznja()
+                        {
+                            Id = reader.GetInt32(0),
+                            Datum_Vreme = DateTime.Now,
+                            Lokacija = reader.GetString(2),
+                            Musterija = reader.GetString(4),
+                            Odrediste = reader.GetString(5),
+                            Dispecer = reader.GetString(6),
+                            Vozac = reader.GetString(7),
+                            Iznos = reader.GetInt32(8),
+                            Komentar = reader.GetString(9),
+                            Status_Voznje = (Voznja.Status)reader.GetInt32(10),
+                            Tip = tip
+
+                        });
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        public bool PrihvatiVoznju(int id, string vozac)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"UPDATE Voznje
+                      SET Vozac = @vozac, Status_Voznje = @status
+                      WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@vozac", vozac);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@status", (int)Models.Voznja.Status.Prihvacena);
+
+
+                return Execute(cmd);
+            }
+        }
+
+        public bool VoznjaNeuspesna(int id)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"UPDATE Voznje
+                      SET Status_Voznje = @status
+                      WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@status", (int)Voznja.Status.Neuspesna);
+                cmd.Parameters.AddWithValue("@id", id);
+
+
+                return Execute(cmd);
+            }
+        }
+
+        public bool VoznjaUspesna(int id, string odrediste, int iznos)
+        {
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"UPDATE Voznje
+                      SET Status_Voznje = @status, Odrediste= @odrediste, Iznos=@iznos
+                      WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@status", (int)Voznja.Status.Uspesna);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@odrediste", odrediste);
+                cmd.Parameters.AddWithValue("@iznos", iznos);
+
+
+                return Execute(cmd);
+            }
+        }
     }
-    }
+}
     

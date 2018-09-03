@@ -191,6 +191,10 @@
     <Content Include="Views\Interaction\AddVoznjaDispecer.cshtml" />
     <Content Include="Views\Home\DodeliVozaca.cshtml" />
     <Content Include="Views\Home\DodeliVozacaResult.cshtml" />
+    <Content Include="Views\Interaction\AddLocation.cshtml" />
+    <Content Include="Views\Home\PrihvatiVoznjuResult.cshtml" />
+    <Content Include="Views\Home\VoznjaUspesna.cshtml" />
+    <Content Include="Views\Home\UspesnaResult.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
