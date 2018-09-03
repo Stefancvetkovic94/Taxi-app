@@ -315,7 +315,88 @@ namespace Projekat.Controllers
 
         }
 
+        [Route("Search")]
+        public ActionResult Search()
+        {
+            string ime = Request.Params["imem"];
+            string prezime = Request.Params["prezimem"];
+            
 
+            return View("Search");
+
+        }
+
+        [Route("Search1")]
+        public ActionResult Search1()
+        {
+            string ime = Request.Params["imem"];
+            string prezime = Request.Params["prezimem"];
+
+            string korisnickoime = string.Empty;
+            if(ime!= "" && prezime != "")
+            {
+                korisnickoime = Baza.GetMusterijaByBoth(ime, prezime);
+
+            }
+            else if(ime != "")
+            {
+                korisnickoime = Baza.GetMusterijaByIme(ime);
+
+
+            }
+            else if (prezime != "")
+            {
+
+                korisnickoime = Baza.GetMusterijaByPrezime(prezime);
+
+            }
+
+            IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+            voznje = Baza.GetVoznjeMusterija(korisnickoime);
+            ViewBag.Voznje = voznje;
+            List<Models.Komentar> komentari = new List<Models.Komentar>();
+            komentari = Baza.GetKomentareZaVoznje();
+            ViewBag.Komentari = komentari;
+
+            return View("SearchResult");
+
+        }
+
+        [Route("Search2")]
+        public ActionResult Search2()
+        {
+            string ime = Request.Params["imev"];
+            string prezime = Request.Params["prezimev"];
+
+            string korisnickoime = string.Empty;
+            if (ime != "" && prezime != "")
+            {
+                korisnickoime = Baza.GetVozacByBoth(ime, prezime);
+
+            }
+            else if (ime != "")
+            {
+                korisnickoime = Baza.GetVozacByIme(ime);
+
+
+            }
+            else if (prezime != "")
+            {
+
+                korisnickoime = Baza.GetVozacPrezime(prezime);
+
+            }
+
+            IEnumerable<Models.Voznja> voznje = new List<Models.Voznja>();
+            voznje = Baza.GetVoznjeVozac(korisnickoime);
+            ViewBag.Voznje = voznje;
+            List<Models.Komentar> komentari = new List<Models.Komentar>();
+            komentari = Baza.GetKomentareZaVoznje();
+            ViewBag.Komentari = komentari;
+
+            return View("SearchResult");
+
+        }
         private string LoggedIn => Request.Cookies[CookieKeys.Login]?.Value;
         private IBaza Baza => (IBaza)HttpContext.Application[ApplicationKeys.Baza];
     }

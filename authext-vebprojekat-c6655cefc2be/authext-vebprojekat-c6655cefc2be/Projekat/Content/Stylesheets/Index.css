@@ -1,16 +1,10 @@
 ﻿
 
-#sidebar {
-    box-sizing: border-box;
-    background-color: white;
-    width: 300px;
-    float: right;
-    padding: 1ex 1em;
-    border: 1px solid black;
-}
+
 
 #the-title {
     margin-bottom: 2ex;
     color:blue;
    
 }
+

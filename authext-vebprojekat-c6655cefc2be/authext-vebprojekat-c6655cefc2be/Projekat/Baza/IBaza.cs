@@ -41,5 +41,13 @@ namespace Projekat.Baza
         bool VozacSlobodan(string ime);
 
 
+        string GetMusterijaByIme(string ime);
+        string GetMusterijaByPrezime(string ime);
+        string GetMusterijaByBoth(string ime, string prezime);
+
+        string GetVozacByIme(string ime);
+        string GetVozacPrezime(string ime);
+        string GetVozacByBoth(string ime, string prezime);
+
     }
 }

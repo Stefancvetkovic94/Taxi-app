@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Pretrazi Musterije</h2>
+<form action="/Search1" method="POST">
+    <div class="input-padded">
+        <label for="input-username">Ime Musterije:</label>
+        <input id="input-username" name="imem" type="text"  />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-password">Prezime Musterije:</label>
+        <input id="input-password" name="prezimem" type="text"  />
+    </div>
+    <input type="submit" value="Pretrazi Musterije" />
+</form>
+<h2>Pretrazi Vozace</h2>
+<form action="/Search2" method="POST">
+    <div class="input-padded">
+        <label for="input-username">Ime Vozaca:</label>
+        <input id="input-username" name="imev" type="text"  />
+    </div>
+
+    <div class="input-padded">
+        <label for="input-password">Prezime Vozaca:</label>
+        <input id="input-password" name="prezimev" type="text"  />
+    </div>
+    <input type="submit" value="Pretrazi Vozace" />
+</form>

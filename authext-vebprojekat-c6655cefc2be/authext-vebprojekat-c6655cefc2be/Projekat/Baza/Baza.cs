@@ -728,6 +728,182 @@ namespace Projekat.Baza
                 return Execute(cmd);
             }
         }
+
+        public string GetMusterijaByIme(string ime)
+        {
+
+            string imee = string.Empty;
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Korisnicko_Ime
+                      FROM Korisnici
+                      WHERE Ime = @name AND Uloga_Korisnika= 0
+                      LIMIT 1;";
+                cmd.Parameters.AddWithValue("@name", ime);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                        return null;
+
+                     imee= reader.GetString(0);
+
+                  
+
+                    return imee;
+
+                   
+                }
+            }
+        }
+
+        public string GetMusterijaByPrezime(string ime)
+        {
+
+            string imee = string.Empty;
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Korisnicko_Ime
+                      FROM Korisnici
+                      WHERE Prezime = @name AND Uloga_Korisnika= 0
+                      LIMIT 1;";
+                cmd.Parameters.AddWithValue("@name", ime);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                        return null;
+
+                    imee = reader.GetString(0);
+
+
+
+                    return imee;
+
+
+                }
+            }
+        }
+
+        public string GetMusterijaByBoth(string ime, string prezime)
+        {
+
+            string imee = string.Empty;
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Korisnicko_Ime
+                      FROM Korisnici
+                      WHERE Prezime = @prezime AND Ime= @ime AND Uloga_Korisnika= 0
+                      LIMIT 1;";
+                cmd.Parameters.AddWithValue("@prezime", prezime);
+                cmd.Parameters.AddWithValue("@ime", ime);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                        return null;
+
+                    imee = reader.GetString(0);
+
+
+
+                    return imee;
+
+
+                }
+            }
+        }
+
+        public string GetVozacByIme(string ime)
+        {
+
+            string imee = string.Empty;
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Korisnicko_Ime
+                      FROM Korisnici
+                      WHERE Ime = @name AND Uloga_Korisnika= 2
+                      LIMIT 1;";
+                cmd.Parameters.AddWithValue("@name", ime);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                        return null;
+
+                    imee = reader.GetString(0);
+
+
+
+                    return imee;
+
+
+                }
+            }
+        }
+
+        public string GetVozacPrezime(string ime)
+        {
+
+            string imee = string.Empty;
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Korisnicko_Ime
+                      FROM Korisnici
+                      WHERE Prezime = @name AND Uloga_Korisnika= 2
+                      LIMIT 1;";
+                cmd.Parameters.AddWithValue("@name", ime);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                        return null;
+
+                    imee = reader.GetString(0);
+
+
+
+                    return imee;
+
+
+                }
+            }
+        }
+
+        public string GetVozacByBoth(string ime, string prezime)
+        {
+
+            string imee = string.Empty;
+            using (var cmd = _conn.CreateCommand())
+            {
+                cmd.CommandText =
+                    @"SELECT Korisnicko_Ime
+                      FROM Korisnici
+                      WHERE Prezime = @prezime AND Ime= @ime AND Uloga_Korisnika= 2
+                      LIMIT 1;";
+                cmd.Parameters.AddWithValue("@prezime", prezime);
+                cmd.Parameters.AddWithValue("@ime", ime);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                        return null;
+
+                    imee = reader.GetString(0);
+
+
+
+                    return imee;
+
+
+                }
+            }
+        }
     }
 }
     

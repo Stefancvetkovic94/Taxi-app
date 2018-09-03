@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "SearchResult";
+}
+
+<h2>SearchResult</h2>
+<a href="/">Back</a>
+<table border="1">
+    <tr bgcolor="lightgrey">
+
+        <td>
+            ID
+        </td>
+        <td>
+            Datum
+        </td>
+        <td>
+            Lokacija
+        </td>
+        <td>
+            Tip
+        </td>
+        <td>
+            Musterija
+        </td>
+        <td>
+            Odrediste
+        </td>
+        <td>
+            Dispecer
+        </td>
+        <td>
+            Vozac
+        </td>
+        <td>
+            iznos
+        </td>
+        <td>
+            Status Voznje
+        </td>
+        <td>
+            Komentar napisao
+        </td>
+        <td>
+            Tekst
+        </td>
+        <td>
+            Ocena
+        </td>
+        <td>
+            Datum
+        </td>
+        <td colspan="2">
+            Opcije
+        </td>
+    </tr> @foreach (var item in ViewBag.Voznje)
+    {
+        int brojac = 0;
+        string coment = "/";
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Datum_Vreme
+            </td>
+            <td>
+                @item.Lokacija
+            </td>
+            <td>
+                @item.Tip
+            </td>
+            <td>
+                @item.Musterija
+            </td>
+            <td>
+                @item.Odrediste
+            </td>
+            <td>
+                @item.Dispecer
+            </td>
+            <td>
+                @item.Vozac
+            </td>
+            <td>
+                @item.Iznos
+            </td>
+            <td>
+                @item.Status_Voznje
+            </td>
+
+            @foreach (var k in ViewBag.Komentari)
+            {
+                brojac++;
+                if (k.Voznja == item.Id)
+                {
+
+                    coment = k.Opis;
+                    <td>
+                        @k.Korisnik
+                    </td>
+                            <td>
+                                @k.Opis
+                            </td>
+                            <td>
+                                @k.Ocena
+                            </td>
+                            <td>
+                                @k.Datum
+                            </td>
+                    break;
+                }
+                else if (brojac == ViewBag.Komentari.Count)
+                {
+
+                    <td>
+                        /
+                    </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                    break;
+
+                }
+            }
+
+            
+        </tr>
+    }
+   
+</table>
+

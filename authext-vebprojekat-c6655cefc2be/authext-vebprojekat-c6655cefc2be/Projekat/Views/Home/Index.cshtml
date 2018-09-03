@@ -43,7 +43,8 @@
             <h3>Pregled vasih voznji:</h3>
             <form action="/Filtriraj" method="POST">
                 <table border="1">
-                    <tr>
+                    <tr bgcolor="lightgrey">
+
                         <td>
                             ID
                         </td>
@@ -216,7 +217,8 @@
             <h3>Pregled svih kreiranih voznji u sistemu:</h3>
             <form action="/Forma" method="POST">
                 <table border="1">
-                    <tr>
+                    <tr bgcolor="lightgrey">
+
                         <td>
                             ID
                         </td>
@@ -381,8 +383,9 @@
 
             <h3>Pregled voznji:</h3>
             <form action="/Filtriraj2" method="POST">
-                <table border="1">
-                    <tr>
+                <table border="1" >
+                    <tr bgcolor="lightgrey">
+
                         <td>
                             ID
                         </td>
@@ -423,7 +426,7 @@
                             Ocena
                         </td>
                         <td>
-                            Datum 
+                            Datum
                         </td>
                         <td colspan="2">
                             Opcije
@@ -564,343 +567,346 @@
         if (ViewBag.User.Uloga_Korisnika == Projekat.Models.Korisnik.Uloga.Dispecer)
         {
 
+            <div>
+                <a class="horizontal" href="/AddVoznjaDispecer">Formiraj voznju</a>
+            </div>
+            <div>
+                <a class="horizontal" href="/Search">Search</a>
+            </div>
 
-              <a class="horizontal" href="/AddVoznjaDispecer">Formiraj voznju</a>
+                <form action="/Sort1" method="POST">
+                    <div class="input-padded">
+                        <label class="padded-right" for="input-kind">Sortiraj po:</label>
+                        <select id="input-kind" name="sort" required>
+                            <option value="1">Datum</option>
+                            <option value="2">Ocena</option>
+                        </select>
+                        <input type="submit" value="Sortiraj" />
 
-            <form action="/Sort1" method="POST">
-               
-
-                <div class="input-padded">
-                    <label class="padded-right" for="input-kind">Sortiraj po:</label>
-                    <select id="input-kind" name="sort" required>
-                        <option value="1">Datum</option>
-                        <option value="2">Ocena</option>
-                    </select>
-                    <input type="submit" value="Sortiraj" />
-
-                </div>
-            </form>
+                    </div>
+                </form>
 
 
-            <h3>Pregled vasih voznji:</h3>
-            <form action="/Filtriraj3" method="POST">
-                <table border="1">
-                    <tr>
-                        <td>
-                            ID
-                        </td>
-                        <td>
-                            Datum
-                        </td>
-                        <td>
-                            Lokacija
-                        </td>
-                        <td>
-                            Tip
-                        </td>
-                        <td>
-                            Musterija
-                        </td>
-                        <td>
-                            Odrediste
-                        </td>
-                        <td>
-                            Dispecer
-                        </td>
-                        <td>
-                            Vozac
-                        </td>
-                        <td>
-                            iznos
-                        </td>
-                        <td>
-                            Status Voznje
-                        </td>
-                        <td>
-                            Komentar napisao
-                        </td>
-                        <td>
-                            Tekst
-                        </td>
-                        <td>
-                            Ocena
-                        </td>
-                        <td>
-                            Datum
-                        </td>
-                        
-                    </tr> @foreach (var item in ViewBag.Voznje)
+                <h3>Pregled vasih voznji:</h3>
+                <form action="/Filtriraj3" method="POST">
+                    <table border="1">
+                        <tr bgcolor="lightgrey">
+                            <td>
+                                ID
+                            </td>
+                            <td>
+                                Datum
+                            </td>
+                            <td>
+                                Lokacija
+                            </td>
+                            <td>
+                                Tip
+                            </td>
+                            <td>
+                                Musterija
+                            </td>
+                            <td>
+                                Odrediste
+                            </td>
+                            <td>
+                                Dispecer
+                            </td>
+                            <td>
+                                Vozac
+                            </td>
+                            <td>
+                                iznos
+                            </td>
+                            <td>
+                                Status Voznje
+                            </td>
+                            <td>
+                                Komentar napisao
+                            </td>
+                            <td>
+                                Tekst
+                            </td>
+                            <td>
+                                Ocena
+                            </td>
+                            <td>
+                                Datum
+                            </td>
+
+                        </tr> @foreach (var item in ViewBag.Voznje)
                     {
                         int brojac = 0;
+                            <tr>
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    @item.Datum_Vreme
+                                </td>
+                                <td>
+                                    @item.Lokacija
+                                </td>
+                                <td>
+                                    @item.Tip
+                                </td>
+                                <td>
+                                    @item.Musterija
+                                </td>
+                                <td>
+                                    @item.Odrediste
+                                </td>
+                                <td>
+                                    @item.Dispecer
+                                </td>
+                                <td>
+                                    @item.Vozac
+                                </td>
+                                <td>
+                                    @item.Iznos
+                                </td>
+                                <td>
+                                    @item.Status_Voznje
+                                </td>
+
+                                @foreach (var k in ViewBag.Komentari)
+                                {
+                                    brojac++;
+                                    if (k.Voznja == item.Id)
+                                    {
+
+
+                                        <td>
+                                            @k.Korisnik
+                                        </td>
+                                        <td>
+                                            @k.Opis
+                                        </td>
+                                        <td>
+                                            @k.Ocena
+                                        </td>
+                                        <td>
+                                            @k.Datum
+                                        </td>
+                                        break;
+                                    }
+                                    else if (brojac == ViewBag.Komentari.Count)
+                                    {
+
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        break;
+
+                                    }
+                                }
+
+
+                            </tr>
+                        }
                         <tr>
-                            <td>
-                                @item.Id
-                            </td>
-                            <td>
-                                @item.Datum_Vreme
-                            </td>
-                            <td>
-                                @item.Lokacija
-                            </td>
-                            <td>
-                                @item.Tip
-                            </td>
-                            <td>
-                                @item.Musterija
-                            </td>
-                            <td>
-                                @item.Odrediste
-                            </td>
-                            <td>
-                                @item.Dispecer
-                            </td>
-                            <td>
-                                @item.Vozac
-                            </td>
-                            <td>
-                                @item.Iznos
-                            </td>
-                            <td>
-                                @item.Status_Voznje
-                            </td>
 
-                            @foreach (var k in ViewBag.Komentari)
-                            {
-                                brojac++;
-                                if (k.Voznja == item.Id)
-                                {
+                            <td>
+                                <div class="input-padded">
+                                    <select id="input-kind" name="status" required>
+                                        <option value="0">Kreirana</option>
+                                        <option value="1">Formirana</option>
+                                        <option value="2">Obradjena</option>
+                                        <option value="3">Prihvacena</option>
+                                        <option value="4">Otkazana</option>
+                                        <option value="5">Neuspesna</option>
+                                        <option value="6">Uspesna</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="submit" value="Filtriraj" />
 
-
-                                    <td>
-                                        @k.Korisnik
-                                    </td>
-                                    <td>
-                                        @k.Opis
-                                    </td>
-                                    <td>
-                                        @k.Ocena
-                                    </td>
-                                    <td>
-                                        @k.Datum
-                                    </td>
-                                    break;
-                                }
-                                else if (brojac == ViewBag.Komentari.Count)
-                                {
-
-                                    <td>
-                                        /
-                                    </td>
-                                        <td>
-                                            /
-                                        </td>
-                                        <td>
-                                            /
-                                        </td>
-                                        <td>
-                                            /
-                                        </td>
-                                    break;
-
-                                }
-                            }
-
-                            
+                            </td>
                         </tr>
-                    }
-                    <tr>
+                    </table>
+                </form>
 
-                        <td>
-                            <div class="input-padded">
-                                <select id="input-kind" name="status" required>
-                                    <option value="0">Kreirana</option>
-                                    <option value="1">Formirana</option>
-                                    <option value="2">Obradjena</option>
-                                    <option value="3">Prihvacena</option>
-                                    <option value="4">Otkazana</option>
-                                    <option value="5">Neuspesna</option>
-                                    <option value="6">Uspesna</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            <input type="submit" value="Filtriraj" />
+                <h3>Sve voznje u sistemu:</h3>
+                <form action="/Filtriraj4" method="POST">
+                    <table border="1">
+                        <tr bgcolor="lightgrey">
 
-                        </td>
-                    </tr>
-                </table>
-            </form>
-
-            <h3>Sve voznje u sistemu:</h3>
-            <form action="/Filtriraj4" method="POST">
-                <table border="1">
-                    <tr>
-                        <td>
-                            ID
-                        </td>
-                        <td>
-                            Datum
-                        </td>
-                        <td>
-                            Lokacija
-                        </td>
-                        <td>
-                            Tip
-                        </td>
-                        <td>
-                            Musterija
-                        </td>
-                        <td>
-                            Odrediste
-                        </td>
-                        <td>
-                            Dispecer
-                        </td>
-                        <td>
-                            Vozac
-                        </td>
-                        <td>
-                            iznos
-                        </td>
-                        <td>
-                            Status Voznje
-                        </td>
-                        <td>
-                            Komentar napisao
-                        </td>
-                        <td>
-                            Tekst
-                        </td>
-                        <td>
-                            Ocena
-                        </td>
-                        <td>
-                            Datum
-                        </td>
-                        <td>
-                            Dodaj vozaca
-                        </td>
-                    </tr> @foreach (var item in ViewBag.VoznjeSve)
+                            <td>
+                                ID
+                            </td>
+                            <td>
+                                Datum
+                            </td>
+                            <td>
+                                Lokacija
+                            </td>
+                            <td>
+                                Tip
+                            </td>
+                            <td>
+                                Musterija
+                            </td>
+                            <td>
+                                Odrediste
+                            </td>
+                            <td>
+                                Dispecer
+                            </td>
+                            <td>
+                                Vozac
+                            </td>
+                            <td>
+                                iznos
+                            </td>
+                            <td>
+                                Status Voznje
+                            </td>
+                            <td>
+                                Komentar napisao
+                            </td>
+                            <td>
+                                Tekst
+                            </td>
+                            <td>
+                                Ocena
+                            </td>
+                            <td>
+                                Datum
+                            </td>
+                            <td>
+                                Dodaj vozaca
+                            </td>
+                        </tr> @foreach (var item in ViewBag.VoznjeSve)
                     {
                         int brojac = 0;
+                            <tr>
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    @item.Datum_Vreme
+                                </td>
+                                <td>
+                                    @item.Lokacija
+                                </td>
+                                <td>
+                                    @item.Tip
+                                </td>
+                                <td>
+                                    @item.Musterija
+                                </td>
+                                <td>
+                                    @item.Odrediste
+                                </td>
+                                <td>
+                                    @item.Dispecer
+                                </td>
+                                <td>
+                                    @item.Vozac
+                                </td>
+                                <td>
+                                    @item.Iznos
+                                </td>
+                                <td>
+                                    @item.Status_Voznje
+                                </td>
+
+                                @foreach (var k in ViewBag.Komentari)
+                                {
+                                    brojac++;
+                                    if (k.Voznja == item.Id)
+                                    {
+
+
+                                        <td>
+                                            @k.Korisnik
+                                        </td>
+                                        <td>
+                                            @k.Opis
+                                        </td>
+                                        <td>
+                                            @k.Ocena
+                                        </td>
+                                        <td>
+                                            @k.Datum
+                                        </td>
+                                        break;
+                                    }
+                                    else if (brojac == ViewBag.Komentari.Count)
+                                    {
+
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        <td>
+                                            /
+                                        </td>
+                                        break;
+
+                                    }
+                                }
+                                @if (item.Vozac == "/")
+                                {
+
+                                    <td>
+                                        @Html.ActionLink("Dodeli vozaca", "DodeliVozaca", new { id = item.Id })
+
+
+
+                                    </td>
+
+                                }
+                                else
+                                {
+
+                                    <td>
+                                        /
+                                    </td>
+
+                                }
+
+                            </tr>
+                        }
                         <tr>
+
                             <td>
-                                @item.Id
+                                <div class="input-padded">
+                                    <select id="input-kind" name="status" required>
+                                        <option value="0">Kreirana</option>
+                                        <option value="1">Formirana</option>
+                                        <option value="2">Obradjena</option>
+                                        <option value="3">Prihvacena</option>
+                                        <option value="4">Otkazana</option>
+                                        <option value="5">Neuspesna</option>
+                                        <option value="6">Uspesna</option>
+                                    </select>
+                                </div>
                             </td>
                             <td>
-                                @item.Datum_Vreme
+                                <input type="submit" value="Filtriraj" />
+
                             </td>
-                            <td>
-                                @item.Lokacija
-                            </td>
-                            <td>
-                                @item.Tip
-                            </td>
-                            <td>
-                                @item.Musterija
-                            </td>
-                            <td>
-                                @item.Odrediste
-                            </td>
-                            <td>
-                                @item.Dispecer
-                            </td>
-                            <td>
-                                @item.Vozac
-                            </td>
-                            <td>
-                                @item.Iznos
-                            </td>
-                            <td>
-                                @item.Status_Voznje
-                            </td>
-
-                            @foreach (var k in ViewBag.Komentari)
-                            {
-                                brojac++;
-                                if (k.Voznja == item.Id)
-                                {
-
-
-                                    <td>
-                                        @k.Korisnik
-                                    </td>
-                                    <td>
-                                        @k.Opis
-                                    </td>
-                                    <td>
-                                        @k.Ocena
-                                    </td>
-                                    <td>
-                                        @k.Datum
-                                    </td>
-                                    break;
-                                }
-                                else if (brojac == ViewBag.Komentari.Count)
-                                {
-
-                                    <td>
-                                        /
-                                    </td>
-                                    <td>
-                                        /
-                                    </td>
-                                        <td>
-                                            /
-                                        </td>
-                                        <td>
-                                            /
-                                        </td>
-                                    break;
-
-                                }
-                            }
-                            @if (item.Vozac == "/")
-                        {
-                              
-                                <td>
-                                    @Html.ActionLink("Dodeli vozaca", "DodeliVozaca", new { id = item.Id })
-
-
-                                    
-                                </td>
-
-                            }
-                            else
-                            {
-
-                                <td>
-                                    /
-                                </td>
-                               
-                            }
-
                         </tr>
-                    }
-                    <tr>
-
-                        <td>
-                            <div class="input-padded">
-                                <select id="input-kind" name="status" required>
-                                    <option value="0">Kreirana</option>
-                                    <option value="1">Formirana</option>
-                                    <option value="2">Obradjena</option>
-                                    <option value="3">Prihvacena</option>
-                                    <option value="4">Otkazana</option>
-                                    <option value="5">Neuspesna</option>
-                                    <option value="6">Uspesna</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            <input type="submit" value="Filtriraj" />
-
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        }
-    }
-</div>
+                    </table>
+                </form>
+                }
+                }
+            </div>
 
 
