@@ -197,6 +197,7 @@
     <Content Include="Views\Home\UspesnaResult.cshtml" />
     <Content Include="Views\Interaction\Search.cshtml" />
     <Content Include="Views\Interaction\SearchResult.cshtml" />
+    <Content Include="Views\Home\AddComentNeuspesna.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

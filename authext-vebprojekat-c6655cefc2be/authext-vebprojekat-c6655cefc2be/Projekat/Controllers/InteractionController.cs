@@ -219,8 +219,8 @@ namespace Projekat.Controllers
                 Opis = Request.Params["opis"],
                 Datum = DateTime.Now,
                 Korisnik = Request.Params["korisnik"],
-                Voznja = Int32.Parse( Request.Params["voznja"]),
-                Ocena = Int32.Parse(Request.Params["ocena"]),
+                Voznja = Int32.Parse(Request.Params["voznja"]),
+                Ocena = 0
                 
 
             };

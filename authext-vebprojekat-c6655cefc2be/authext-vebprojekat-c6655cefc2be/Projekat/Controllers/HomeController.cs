@@ -219,12 +219,12 @@ namespace Projekat.Controllers
 
             if (Baza.VoznjaNeuspesna(idvoznje))
             {
-                return View("AddComent");
+                return View("AddComentNeuspesna");
 
             }
             else
             {
-                return View("AddComent");
+                return View("AddComentNeuspesna");
 
             }
 

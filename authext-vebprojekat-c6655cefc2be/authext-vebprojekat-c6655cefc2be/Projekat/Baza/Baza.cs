@@ -87,7 +87,8 @@ namespace Projekat.Baza
                         k.Lokacija = reader.GetString(7);
                     if (reader.GetString(8) != "0")
                         k.Automobil = reader.GetString(8);
-
+                    k.Pol = reader.GetString(3);
+                    k.JMBG = reader.GetString(5);
                     return k;
 
                     /*  return new Korisnik()
